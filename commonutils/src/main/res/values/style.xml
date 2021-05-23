@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AnimationPopUpWindowScaleInOut">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
+
+    <style name="ButtonNormalFilled" parent="Widget.MaterialComponents.Button">
+        <item name="textAllCaps">false</item>
+        <item name="background">@drawable/shape_filled_normal</item>
+        <item name="android:fontFamily">@font/helvetica_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@color/color_state_list</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonNormalFilledOcr" parent="Widget.MaterialComponents.Button">
+        <item name="textAllCaps">false</item>
+        <item name="background">@drawable/shape_filled_normal</item>
+        <item name="android:fontFamily">@font/helvetica_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="backgroundTint">@color/color_state_list</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <!--    BUTTONS-->
+
+    <style name="AKCommonUtils.MaterialButton.PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/color_button_primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/radius_16</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+
+    <style name="AKCommonUtils.MaterialButton.SecondaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/color_button_secondary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/radius_16</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="AKCommonUtils.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/grayLight</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+    </style>
+
+    <style name="AKCommonUtils.ExposedDropdownMenu.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/grayLight</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+    </style>
+
+    <style name="AKCommonUtils.ExposedDropdownMenu.TrailingTheme" parent="">
+        <item name="colorPrimary">@color/greenStrong</item>
+        <item name="colorPrimaryVariant">@color/greenStrong</item>
+    </style>
+
+    <style name="AKCommonUtils.TextInputLayout.TextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorControlActivated">@color/secondaryColor</item>
+    </style>
+
+
+    <style name="AKCommonUtils.Shape.BorderLeftBottom" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+
+    <style name="AKCommonUtils.Toolbar.Title" parent="">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+</resources>

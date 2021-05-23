@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="title_dialog">#80C913</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_message_generic">#7C7C7C</color>
+    <color name="color_message_generic_warning">#363636</color>
+    <color name="color_button_aceptar">#006341</color>
+    <color name="color_button_cancelar">#A2C541</color>
+
+    <color name="primaryColor">#FAFAFA</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#C7C7C7</color>
+
+    <color name="secondaryColor">#80C913</color>
+    <color name="secondaryLightColor">#D5F872</color>
+    <color name="secondaryDarkColor">#6F9401</color>
+
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="grayLight">#F5F5F5</color>
+    <color name="grayOxford">#363636</color>
+
+    <color name="blue">#072553</color>
+
+    <color name="greenStrong">#0C6D48</color>
+
+    <color name="redError">#AF272F</color>
+
+</resources>

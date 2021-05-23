@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+
+    <!--    Validations-->
+    <string name="validation_required">El campo es requerido</string>
+    <string name="validation_min_number">Mínimo</string>
+    <string name="validation_email"><b>Ingrese</b> un correo válido</string>
+    <string name="validation_cardNumber"><b>Ingrese</b> Los 16 digitos de su tarjeta</string>
+    <string name="validation_cardExpiryDate"><b>Ingrese</b> la fecha de vencimiNIento de su tarjeta</string>
+    <string name="validation_card_nip"><b>Ingrese</b> un NIP correcto</string>
+    <string name="cargando">Cargando...</string>
+    <string name="c_digo_de_confirmaci_n">Código de confirmación</string>
+    <string name="ingresa_el_c_digo_de_confirmaci_n">Ingresa el código de confirmación</string>
+    <string name="renviar_c_digo">Renviar código</string>
+    <string name="que_te_enviamos_v_a_correo">que te enviamos vía correo</string>
+    <string name="continuar">Continuar</string>.
+    <string name="countdown_in_zero">0:00</string>
+    <string name="coinid">Código de confirmación caducado</string>
+    <string name="message_codephone">que te enviamos vía sms a tu celular</string>
+</resources>
