@@ -1,0 +1,19 @@
+def dirRootProject = "$buildDir/../../.."
+def directories =  [
+        "$dirRootProject/boreal-altemis-generic/commonutils"
+]
+def nameFile = "commonutils"
+
+task assemblePRODAndCopy(dependsOn: 'assembleRelease') {
+  doLast{
+        println("copy into:")
+        directories.each { destiny ->
+            println(destiny)
+            copy {
+                from "$buildDir/outputs/aar/$nameFile-release.aar"
+                into destiny
+                rename ("$nameFile-release.aar", nameFile+".aar")
+            }
+        }
+    }
+}

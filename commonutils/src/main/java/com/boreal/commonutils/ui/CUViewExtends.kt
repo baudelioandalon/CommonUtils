@@ -53,7 +53,7 @@ fun String.decrypt(): String {
     return decrypt
 }
 
-fun FragmentActivity.disableBackButton(){
+fun FragmentActivity.disableBackButton() {
     onBackPressedDispatcher.addCallback(this) {}
 }
 
@@ -64,10 +64,6 @@ fun CharSequence.removeTilde(): String {
     return REGEX_UNACCENT.replace(temp, "")
 }
 
-fun TextInputEditText.saveData(keyValue: String){
-    CUAppInit.getCUSecurity().saveData(keyValue, this.text.toString())
-}
-
-fun String.saveData(keyValue: String){
-    CUAppInit.getCUSecurity().saveData(keyValue, this )
+fun <T: Any> T.saveData(keyValue: String) {
+    CUAppInit.getCUSecurity().saveData(keyValue, this)
 }

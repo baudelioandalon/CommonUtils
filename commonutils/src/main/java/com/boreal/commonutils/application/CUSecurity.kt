@@ -6,6 +6,7 @@ import android.provider.Settings
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.boreal.commonutils.common.CUTypeObjectEncrypted
+import com.google.android.material.textfield.TextInputEditText
 import javax.inject.Inject
 
 class CUSecurity @Inject constructor(private val context: Context){
@@ -34,6 +35,10 @@ class CUSecurity @Inject constructor(private val context: Context){
 
     fun saveData(key: String, value: Any): Boolean{
         return when(value){
+            is TextInputEditText -> {
+                sharedPreferencesEditor.putString(key,  value.text.toString().trim().trimIndent()).apply()
+                true
+            }
             is String -> {
                 sharedPreferencesEditor.putString(key, value).apply()
                 true
