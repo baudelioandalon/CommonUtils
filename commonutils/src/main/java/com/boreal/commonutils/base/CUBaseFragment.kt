@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
+import com.boreal.commonutils.ui.disableBackButton
 import kotlin.reflect.KClass
 
 abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) : Fragment() {
@@ -57,6 +58,10 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      */
     fun showProgressBarCustom(message: String? = null, isCancelable: Boolean = false){
         CUBackHandler.showProgressBarCustom(message, isCancelable)
+    }
+
+    fun disableBackButton(){
+        requireActivity().disableBackButton()
     }
 
     /**

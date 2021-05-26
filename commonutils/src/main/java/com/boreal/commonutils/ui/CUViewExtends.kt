@@ -2,10 +2,15 @@ package com.boreal.commonutils.ui
 
 import android.util.Log
 import android.view.View
+import androidx.activity.addCallback
+import androidx.fragment.app.FragmentActivity
 import com.boreal.commonutils.application.CUAppInit
 import com.boreal.commonutils.common.CUTypeObjectEncrypted
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
+import com.boreal.commonutils.ui.components.CUTextField
+import com.google.android.material.textfield.TextInputEditText
+import java.text.Normalizer
 
 fun View.hideView() {
     this.visibility = View.GONE
@@ -46,4 +51,23 @@ fun String.decrypt(): String {
     Log.e("DECRYPT KEY", privateKey)
     Log.e("DECRYPTED", decrypt)
     return decrypt
+}
+
+fun FragmentActivity.disableBackButton(){
+    onBackPressedDispatcher.addCallback(this) {}
+}
+
+private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()
+
+fun CharSequence.removeTilde(): String {
+    val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+    return REGEX_UNACCENT.replace(temp, "")
+}
+
+fun TextInputEditText.saveData(keyValue: String){
+    CUAppInit.getCUSecurity().saveData(keyValue, this.text.toString())
+}
+
+fun String.saveData(keyValue: String){
+    CUAppInit.getCUSecurity().saveData(keyValue, this )
 }

@@ -51,4 +51,14 @@ class CUToolbar(context: Context?, attrs: AttributeSet?) : LinearLayout(context,
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
     }
+
+    fun disableBackButton(activity: AppCompatActivity) {
+        activity.setSupportActionBar(toolbar)
+        activity.actionBar?.setDisplayShowTitleEnabled(false)
+        val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_baseline_arrow_back_24)
+        val actionBar = activity.supportActionBar
+        actionBar?.setHomeAsUpIndicator(drawable)
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        actionBar?.setDisplayShowHomeEnabled(false)
+    }
 }
