@@ -9,13 +9,12 @@ import com.boreal.commonutils.common.CUTypeObjectEncrypted
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
 import java.text.Normalizer
-import kotlin.reflect.KClass
 
-fun View.hideView() {
+fun <T : View> T.hideView() {
     this.visibility = View.GONE
 }
 
-fun View.showView() {
+fun <T : View> T.showView() {
     this.visibility = View.VISIBLE
 }
 
