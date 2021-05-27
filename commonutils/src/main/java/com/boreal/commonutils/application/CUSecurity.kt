@@ -5,11 +5,11 @@ import android.content.SharedPreferences
 import android.provider.Settings
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.boreal.commonutils.common.CUTypeObjectEncrypted
 import com.google.android.material.textfield.TextInputEditText
 import javax.inject.Inject
+import kotlin.reflect.KClass
 
-class CUSecurity @Inject constructor(private val context: Context){
+class CUSecurity @Inject constructor(private val context: Context) {
 
     private var masterKey = MasterKey.Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -29,14 +29,15 @@ class CUSecurity @Inject constructor(private val context: Context){
         sharedPreferencesEditor.apply()
     }
 
-    fun remove(key: String){
+    fun remove(key: String) {
         sharedPreferencesEditor.remove(key)
     }
 
-    fun saveData(key: String, value: Any): Boolean{
-        return when(value){
+    fun saveData(key: String, value: Any): Boolean {
+        return when (value) {
             is TextInputEditText -> {
-                sharedPreferencesEditor.putString(key,  value.text.toString().trim().trimIndent()).apply()
+                sharedPreferencesEditor.putString(key, value.text.toString().trim().trimIndent())
+                    .apply()
                 true
             }
             is String -> {
@@ -63,27 +64,31 @@ class CUSecurity @Inject constructor(private val context: Context){
         }
     }
 
-    fun getData(key: String, type: CUTypeObjectEncrypted): Any {
-        return when(type){
-            CUTypeObjectEncrypted.STRING_OBJECT -> {
-                sharedPreferences.getString(key, "").toString()
+    fun getData(key: String, type: Any):  Any{
+        return when (type) {
+            is String -> {
+                sharedPreferences.getString(key, "") as String
             }
-            CUTypeObjectEncrypted.INT_OBJECT -> {
+            is Int -> {
                 sharedPreferences.getInt(key, 0)
             }
-            CUTypeObjectEncrypted.BOOLEAN_OBJECT -> {
+            is Boolean -> {
                 sharedPreferences.getBoolean(key, false)
             }
-            CUTypeObjectEncrypted.FLOAT_OBJECT -> {
+            is Float -> {
                 sharedPreferences.getFloat(key, 0f)
             }
-            CUTypeObjectEncrypted.LONG_OBJECT -> {
+            is Long -> {
                 sharedPreferences.getLong(key, 0)
+            }
+            else -> {
+
             }
         }
     }
 
-    fun getDeviceId(): String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    fun getDeviceId(): String =
+        Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
     companion object {
         const val ENCRIPTED_PREFERENCES = "encrypted_preferences"

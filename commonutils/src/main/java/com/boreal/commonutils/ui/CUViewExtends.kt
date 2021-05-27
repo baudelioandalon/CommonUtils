@@ -8,14 +8,12 @@ import com.boreal.commonutils.application.CUAppInit
 import com.boreal.commonutils.common.CUTypeObjectEncrypted
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
-import com.boreal.commonutils.ui.components.CUTextField
-import com.google.android.material.textfield.TextInputEditText
 import java.text.Normalizer
+import kotlin.reflect.KClass
 
 fun View.hideView() {
     this.visibility = View.GONE
 }
-
 
 fun View.showView() {
     this.visibility = View.VISIBLE
@@ -64,6 +62,6 @@ fun CharSequence.removeTilde(): String {
     return REGEX_UNACCENT.replace(temp, "")
 }
 
-fun <T: Any> T.saveData(keyValue: String) {
-    CUAppInit.getCUSecurity().saveData(keyValue, this)
-}
+fun <T : Any> T.saveData(keyValue: String) = CUAppInit.getCUSecurity().saveData(keyValue, this)
+
+fun <T> T.getData(keyValue: String) = CUAppInit.getCUSecurity().getData(keyValue,this as Any) as T
