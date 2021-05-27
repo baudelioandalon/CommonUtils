@@ -64,4 +64,4 @@ fun CharSequence.removeTilde(): String {
 
 fun <T : Any> T.saveData(keyValue: String) = CUAppInit.getCUSecurity().saveData(keyValue, this)
 
-fun <T> T.getData(keyValue: String) = CUAppInit.getCUSecurity().getData(keyValue,this as Any) as T
+fun <T> T.getData(keyValue: String) = CUAppInit.getCUSecurity().getData(keyValue, this as Any) as T
