@@ -1,4 +1,4 @@
-package com.boreal.commonutils.bottomnavigation
+package com.boreal.commonutils.navigation
 
 import android.animation.ValueAnimator
 import android.content.Context

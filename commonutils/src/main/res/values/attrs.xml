@@ -24,16 +24,17 @@
     </declare-styleable>
 
     <declare-styleable name="flowBottomNavigation">
-        <attr name="mbn_defaultIconColor" format="color" />
-        <attr name="mbn_selectedIconColor" format="color" />
-        <attr name="mbn_backgroundBottomColor" format="color" />
-        <attr name="mbn_circleColor" format="color" />
-        <attr name="mbn_countTextColor" format="color" />
-        <attr name="mbn_countBackgroundColor" format="color" />
-        <attr name="mbn_countTypeface" format="string" />
-        <attr name="mbn_rippleColor" format="color" />
-        <attr name="mbn_shadowColor" format="color" />
-        <attr name="mbn_hasAnimation" format="boolean" />
+        <attr name="cu_defaultIconColor" format="color" />
+        <attr name="cu_selectedIconColor" format="color" />
+        <attr name="cu_backgroundBottomColor" format="color" />
+        <attr name="cu_circleColor" format="color" />
+        <attr name="cu_countTextColor" format="color" />
+        <attr name="cu_countBackgroundColor" format="color" />
+        <attr name="cu_countTypeface" format="string" />
+        <attr name="cu_rippleColor" format="color" />
+        <attr name="cu_shadowColor" format="color" />
+        <attr name="cu_hasAnimation" format="boolean" />
+        <attr name="cu_heightCell" format="integer"/>
     </declare-styleable>
 
 </resources>

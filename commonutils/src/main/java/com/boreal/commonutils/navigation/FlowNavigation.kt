@@ -1,7 +1,4 @@
-
-@file:Suppress("unused")
-
-package com.boreal.commonutils.bottomnavigation
+package com.boreal.commonutils.navigation
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -17,18 +14,10 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.boreal.commonutils.R
 import kotlin.math.abs
 
-/**
- * Meow Bottom Navigation Cell class.
- *
- * @author  Hamidreza Etebarian
- * @version 1.0.0
- * @since   2019-02-10
- */
 
-internal typealias IBottomNavigationListener = (model: MeowBottomNavigation.Model) -> Unit
+internal typealias IBottomNavigationListener = (model: FlowNavigation.Model) -> Unit
 
-@Suppress("MemberVisibilityCanBePrivate")
-class MeowBottomNavigation : FrameLayout {
+class FlowNavigation: FrameLayout {
 
     var models = ArrayList<Model>()
     var cells = ArrayList<FlowBottomNavigationCell>()
@@ -94,7 +83,7 @@ class MeowBottomNavigation : FrameLayout {
     private lateinit var bezierView: BezierView
 
     init {
-        heightCell = 96.dp(context)
+        heightCell = 120.dp(context)
     }
 
     constructor(context: Context) : super(context) {
@@ -107,9 +96,9 @@ class MeowBottomNavigation : FrameLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     ) {
         setAttributeFromXml(context, attrs)
         initializeViews()
@@ -117,42 +106,42 @@ class MeowBottomNavigation : FrameLayout {
 
     private fun setAttributeFromXml(context: Context, attrs: AttributeSet) {
         val a = context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.flowBottomNavigation, 0, 0
+                attrs,
+                R.styleable.flowBottomNavigation, 0, 0
         )
         try {
             a.apply {
                 defaultIconColor = getColor(
-                    R.styleable.flowBottomNavigation_mbn_defaultIconColor,
-                    defaultIconColor
+                        R.styleable.flowBottomNavigation_cu_defaultIconColor,
+                        defaultIconColor
                 )
                 selectedIconColor = getColor(
-                    R.styleable.flowBottomNavigation_mbn_selectedIconColor,
-                    selectedIconColor
+                        R.styleable.flowBottomNavigation_cu_selectedIconColor,
+                        selectedIconColor
                 )
                 backgroundBottomColor = getColor(
-                    R.styleable.flowBottomNavigation_mbn_backgroundBottomColor,
-                    backgroundBottomColor
+                        R.styleable.flowBottomNavigation_cu_backgroundBottomColor,
+                        backgroundBottomColor
                 )
                 circleColor =
-                    getColor(R.styleable.flowBottomNavigation_mbn_circleColor, circleColor)
+                        getColor(R.styleable.flowBottomNavigation_cu_circleColor, circleColor)
                 countTextColor =
-                    getColor(R.styleable.flowBottomNavigation_mbn_countTextColor, countTextColor)
+                        getColor(R.styleable.flowBottomNavigation_cu_countTextColor, countTextColor)
                 countBackgroundColor = getColor(
-                    R.styleable.flowBottomNavigation_mbn_countBackgroundColor,
-                    countBackgroundColor
+                        R.styleable.flowBottomNavigation_cu_countBackgroundColor,
+                        countBackgroundColor
                 )
                 rippleColor =
-                    getColor(R.styleable.flowBottomNavigation_mbn_rippleColor, rippleColor)
+                        getColor(R.styleable.flowBottomNavigation_cu_rippleColor, rippleColor)
                 shadowColor =
-                    getColor(R.styleable.flowBottomNavigation_mbn_shadowColor, shadowColor)
+                        getColor(R.styleable.flowBottomNavigation_cu_shadowColor, shadowColor)
 
-                val typeface = getString(R.styleable.flowBottomNavigation_mbn_countTypeface)
+                val typeface = getString(R.styleable.flowBottomNavigation_cu_countTypeface)
                 if (typeface != null && typeface.isNotEmpty())
                     countTypeface = Typeface.createFromAsset(context.assets, typeface)
 
                 hasAnimation =
-                    getBoolean(R.styleable.flowBottomNavigation_mbn_hasAnimation, hasAnimation)
+                        getBoolean(R.styleable.flowBottomNavigation_cu_hasAnimation, hasAnimation)
             }
         } finally {
             a.recycle()
@@ -162,7 +151,7 @@ class MeowBottomNavigation : FrameLayout {
     private fun initializeViews() {
         ll_cells = LinearLayout(context)
         ll_cells.apply {
-            val params = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightCell)
+            val params = FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightCell)
             params.gravity = Gravity.BOTTOM
             layoutParams = params
             orientation = LinearLayout.HORIZONTAL
@@ -172,9 +161,9 @@ class MeowBottomNavigation : FrameLayout {
 
         bezierView = BezierView(context)
         bezierView.apply {
-            layoutParams = LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightCell)
+            layoutParams = FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightCell)
             color = backgroundBottomColor
-            shadowColor = this@MeowBottomNavigation.shadowColor
+            shadowColor = this@FlowNavigation.shadowColor
         }
 
         addView(bezierView)
@@ -186,9 +175,9 @@ class MeowBottomNavigation : FrameLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (selectedId == -1) {
             bezierView.bezierX =
-                if (Build.VERSION.SDK_INT >= 17 && layoutDirection == LayoutDirection.RTL) measuredWidth + 0f.dp(
-                    context
-                ) else (-0f).dp(context)
+                    if (Build.VERSION.SDK_INT >= 17 && layoutDirection == LayoutDirection.RTL) measuredWidth + 0f.dp(
+                            context
+                    ) else (-0f).dp(context)
         }
         if (selectedId != -1) {
             show(selectedId, false)
@@ -203,13 +192,13 @@ class MeowBottomNavigation : FrameLayout {
             icon = model.icon
             count = model.count
             title = model.title
-            defaultIconColor = this@MeowBottomNavigation.defaultIconColor
-            selectedIconColor = this@MeowBottomNavigation.selectedIconColor
-            circleColor = this@MeowBottomNavigation.circleColor
-            countTextColor = this@MeowBottomNavigation.countTextColor
-            countBackgroundColor = this@MeowBottomNavigation.countBackgroundColor
-            countTypeface = this@MeowBottomNavigation.countTypeface
-            rippleColor = this@MeowBottomNavigation.rippleColor
+            defaultIconColor = this@FlowNavigation.defaultIconColor
+            selectedIconColor = this@FlowNavigation.selectedIconColor
+            circleColor = this@FlowNavigation.circleColor
+            countTextColor = this@FlowNavigation.countTextColor
+            countBackgroundColor = this@FlowNavigation.countBackgroundColor
+            countTypeface = this@FlowNavigation.countTypeface
+            rippleColor = this@FlowNavigation.rippleColor
             onClickListener = {
                 if (isShowing(model.id)) // added for https://github.com/shetmobile/MeowBottomNavigation/issues/39
                     onReselectListener(model)

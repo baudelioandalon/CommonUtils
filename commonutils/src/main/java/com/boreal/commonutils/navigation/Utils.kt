@@ -1,4 +1,4 @@
-package com.boreal.commonutils.bottomnavigation
+package com.boreal.commonutils.navigation
 
 import android.content.Context
 import android.content.res.ColorStateList
