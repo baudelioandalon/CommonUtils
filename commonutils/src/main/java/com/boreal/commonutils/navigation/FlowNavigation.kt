@@ -357,7 +357,7 @@ class FlowNavigation: FrameLayout {
         onReselectListener = listener
     }
 
-    class Model(var id: Int, var icon: Int, var title: String) {
+    class Model(var id: Int, var icon: Int, var title: String = "") {
 
         var count: String = FlowBottomNavigationCell.EMPTY_VALUE
 
