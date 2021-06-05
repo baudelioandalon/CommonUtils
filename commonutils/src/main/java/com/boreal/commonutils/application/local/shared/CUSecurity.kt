@@ -1,4 +1,4 @@
-package com.boreal.commonutils.application
+package com.boreal.commonutils.application.local.shared
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,6 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.google.android.material.textfield.TextInputEditText
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class CUSecurity @Inject constructor(private val context: Context) {
 

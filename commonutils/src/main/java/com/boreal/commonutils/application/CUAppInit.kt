@@ -52,13 +52,13 @@ open class CUAppInit {
 
         lateinit var appGlobal : CUApplicationComponent
 
-        fun getAppContext(): Context {
-            return appGlobal.context()
-        }
+        fun getAppContext() = appGlobal.context()
 
-        fun getCUSecurity(): CUSecurity {
-            return appGlobal.security()
-        }
+        fun getCUSecurity() = appGlobal.security()
+
+        fun getRoomInstance() = appGlobal.roomInstance()
+
+        fun getRealmInstance() = appGlobal.realmInstance()
 
     }
 

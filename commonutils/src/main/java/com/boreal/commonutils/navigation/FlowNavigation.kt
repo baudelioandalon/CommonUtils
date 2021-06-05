@@ -83,7 +83,7 @@ class FlowNavigation: FrameLayout {
     private lateinit var bezierView: BezierView
 
     init {
-        heightCell = 120.dp(context)
+        heightCell = 110.dp(context)
     }
 
     constructor(context: Context) : super(context) {

@@ -1,4 +1,4 @@
-package com.boreal.commonutils.ui.components
+package com.boreal.commonutils.component.cutoolbar
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -60,5 +60,12 @@ class CUToolbar(context: Context?, attrs: AttributeSet?) : LinearLayout(context,
         actionBar?.setHomeAsUpIndicator(drawable)
         actionBar?.setDisplayHomeAsUpEnabled(false)
         actionBar?.setDisplayShowHomeEnabled(false)
+    }
+
+    fun enableImage(activity: AppCompatActivity) {
+        activity.apply {
+            setSupportActionBar(toolbar)
+
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.boreal.commonutils.ui.components
+package com.boreal.commonutils.component.pdfviewer
 
 import android.content.Context
 import com.github.barteksc.pdfviewer.PDFView

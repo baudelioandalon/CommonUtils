@@ -1,4 +1,4 @@
-package com.boreal.commonutils.ui.components
+package com.boreal.commonutils.component.cutextfield
 
 import com.boreal.commonutils.R
 

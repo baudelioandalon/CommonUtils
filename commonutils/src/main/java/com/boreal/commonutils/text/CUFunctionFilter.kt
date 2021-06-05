@@ -4,7 +4,7 @@ import android.text.InputFilter
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
-import com.boreal.commonutils.ui.components.CUTextField
+import com.boreal.commonutils.component.cutextfield.CUTextField
 
 fun CUTextField.addFilterNotCharacterSpecial(exceptionType: Any? = null) {
     editText.filters = editText.filters + filterNotCharacterSpecial(exceptionType)

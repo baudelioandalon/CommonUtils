@@ -1,4 +1,4 @@
-package com.boreal.commonutils.ui.components
+package com.boreal.commonutils.component.cudropdown
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,6 @@ import android.widget.TextView
 import com.boreal.commonutils.R
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
-
 
 @SuppressLint("Recycle")
 class CUDropdownMenu(context: Context?, attrs: AttributeSet?) : LinearLayout(context, attrs) {

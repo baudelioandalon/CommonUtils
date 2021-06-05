@@ -1,4 +1,4 @@
-package com.boreal.commonutils.ui.components
+package com.boreal.commonutils.component.cutextfield
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,6 +19,8 @@ import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 
 @SuppressLint("Recycle")
 class CUTextField(context: Context?, attrs: AttributeSet?) : LinearLayout(context, attrs) {
+
+    private var realValueFromEditText = ""
 
     val tvLabel: TextView by lazy {
         findViewById(R.id.tv_label)
@@ -103,5 +105,15 @@ class CUTextField(context: Context?, attrs: AttributeSet?) : LinearLayout(contex
             CUAppInit.getAppContext(),
             drawable
         )
+    }
+
+    fun getRealValueFromEditText() = realValueFromEditText
+
+    fun updateRealValueFromEditText(customValue: String? = null) {
+        realValueFromEditText = customValue ?: editText.text.toString()
+    }
+
+    fun cleanRealValueFromEditText() {
+        realValueFromEditText = ""
     }
 }
