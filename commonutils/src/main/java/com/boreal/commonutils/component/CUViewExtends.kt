@@ -1,5 +1,7 @@
-package com.boreal.commonutils.ui
+package com.boreal.commonutils.component
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.FragmentActivity
@@ -20,6 +22,19 @@ fun <T : View> T.hideView() {
 
 fun <T : View> T.showView() {
     this.visibility = View.VISIBLE
+}
+
+fun View.animateFadeIn(duration: Long = 350) {
+    this.alpha = 0.0f
+    this.animate()
+        .setDuration(duration)
+        .alpha(1.0f)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                this@animateFadeIn.animate().setListener(null)
+            }
+        })
 }
 
 fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? =  null) {

@@ -1,8 +1,8 @@
 package com.boreal.appcommonutils.ui.main
 
 import android.util.Log
-import com.boreal.commonutils.ui.getData
-import com.boreal.commonutils.ui.saveData
+import com.boreal.commonutils.component.getData
+import com.boreal.commonutils.component.saveData
 
 fun MainActivity.initElements(){
 

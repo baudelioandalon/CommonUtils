@@ -25,6 +25,7 @@ class FlowNavigation: FrameLayout {
     private var callListenerWhenIsSelected = false
 
     private var selectedId = -1
+    private var beforeId = -1
 
     private var onClickedListener: IBottomNavigationListener = {}
     private var onShowListener: IBottomNavigationListener = {}
@@ -297,12 +298,18 @@ class FlowNavigation: FrameLayout {
                 cell.disableCell(hasAnimation)
             }
         }
+
+        beforeId = selectedId
         selectedId = id
     }
 
     fun isShowing(id: Int): Boolean {
         return selectedId == id
     }
+
+    fun whichSelectedId() = selectedId
+
+    fun beforeSelectedId() = beforeId
 
     fun getModelById(id: Int): Model? {
         models.forEach {
