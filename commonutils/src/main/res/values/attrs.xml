@@ -37,7 +37,7 @@
         <attr name="cu_heightCell" format="integer"/>
     </declare-styleable>
 
-    <declare-styleable name="ShadowLayout">
+    <declare-styleable name="CUShadowLayout">
         <attr name="sl_shadowed" format="boolean"/>
         <attr name="sl_shadow_distance" format="dimension"/>
         <attr name="sl_shadow_angle" format="integer"/>

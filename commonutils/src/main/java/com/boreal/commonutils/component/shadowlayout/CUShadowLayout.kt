@@ -1,7 +1,5 @@
 package com.boreal.commonutils.component.shadowlayout
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
@@ -15,9 +13,9 @@ import com.boreal.commonutils.component.doSync
 
 
 class CUShadowLayout @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
     // Shadow paint
     private val mPaint: Paint = object : Paint(ANTI_ALIAS_FLAG) {
@@ -116,10 +114,10 @@ class CUShadowLayout @JvmOverloads constructor(
 
     private fun adjustShadowAlpha(adjust: Boolean): Int {
         return Color.argb(
-                if (adjust) MAX_ALPHA else mShadowAlpha,
-                Color.red(mShadowColor),
-                Color.green(mShadowColor),
-                Color.blue(mShadowColor)
+            if (adjust) MAX_ALPHA else mShadowAlpha,
+            Color.red(mShadowColor),
+            Color.green(mShadowColor),
+            Color.blue(mShadowColor)
         )
     }
 
@@ -145,7 +143,7 @@ class CUShadowLayout @JvmOverloads constructor(
                 if (mBounds.width() != 0 && mBounds.height() != 0) {
                     // Reset bitmap to bounds
                     mBitmap = Bitmap.createBitmap(
-                            mBounds.width(), mBounds.height(), Bitmap.Config.ARGB_8888
+                        mBounds.width(), mBounds.height(), Bitmap.Config.ARGB_8888
                     )
                     // Canvas reset
                     mCanvas!!.setBitmap(mBitmap)
@@ -179,7 +177,7 @@ class CUShadowLayout @JvmOverloads constructor(
             mPaint.color = adjustShadowAlpha(true)
             // Draw shadow bitmap
             if (mCanvas != null && mBitmap != null && !mBitmap!!.isRecycled) canvas.drawBitmap(
-                    mBitmap!!, 0.0f, 0.0f, mPaint
+                mBitmap!!, 0.0f, 0.0f, mPaint
             )
         }
 
@@ -206,31 +204,31 @@ class CUShadowLayout @JvmOverloads constructor(
         setLayerType(LAYER_TYPE_HARDWARE, mPaint)
 
         // Retrieve attributes from xml
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CUShadowLayout)
         doSync(
-                {
-                    try {
-                        isShadowed = typedArray.getBoolean(R.styleable.ShadowLayout_sl_shadowed, true)
-                        shadowRadius = typedArray.getDimension(
-                                R.styleable.ShadowLayout_sl_shadow_radius, DEFAULT_SHADOW_RADIUS
-                        )
-                        shadowDistance = typedArray.getDimension(
-                                R.styleable.ShadowLayout_sl_shadow_distance, DEFAULT_SHADOW_DISTANCE
-                        )
-                        shadowAngle = typedArray.getInteger(
-                                R.styleable.ShadowLayout_sl_shadow_angle, DEFAULT_SHADOW_ANGLE.toInt()
-                        )
-                                .toFloat()
-                        shadowColor = typedArray.getColor(
-                                R.styleable.ShadowLayout_sl_shadow_color, DEFAULT_SHADOW_COLOR
-                        )
-                    } finally {
-                        typedArray.recycle()
-                    }
-                }, {
-            this@CUShadowLayout.visibility = VISIBLE
-            this.animateFadeIn()
-        }
+            {
+                try {
+                    isShadowed = typedArray.getBoolean(R.styleable.CUShadowLayout_sl_shadowed, true)
+                    shadowRadius = typedArray.getDimension(
+                        R.styleable.CUShadowLayout_sl_shadow_radius, DEFAULT_SHADOW_RADIUS
+                    )
+                    shadowDistance = typedArray.getDimension(
+                        R.styleable.CUShadowLayout_sl_shadow_distance, DEFAULT_SHADOW_DISTANCE
+                    )
+                    shadowAngle = typedArray.getInteger(
+                        R.styleable.CUShadowLayout_sl_shadow_angle, DEFAULT_SHADOW_ANGLE.toInt()
+                    )
+                        .toFloat()
+                    shadowColor = typedArray.getColor(
+                        R.styleable.CUShadowLayout_sl_shadow_color, DEFAULT_SHADOW_COLOR
+                    )
+                } finally {
+                    typedArray.recycle()
+                }
+            }, {
+                this@CUShadowLayout.visibility = VISIBLE
+                this.animateFadeIn()
+            }
         )
     }
 }

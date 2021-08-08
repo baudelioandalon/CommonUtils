@@ -2,8 +2,22 @@ package com.boreal.commonutils.component
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
+import android.text.InputFilter
+import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
 import com.boreal.commonutils.application.local.room.CUUserModel
 import com.boreal.commonutils.application.CUAppInit
@@ -50,6 +64,10 @@ fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? =  null) {
     }
 }
 
+
+fun View.setOnSingleClickListener(doOnClick: ((View) -> Unit)) =
+    setOnClickListener(OnSingleClickListener(doOnClick))
+
 fun <T> T.encrypt(): String {
     val encrypted: String
     CUEncryptDecrypt.apply {
@@ -76,6 +94,110 @@ fun String.maskCardNumber() = if (this.length == 16) {
     this.substring(0, 4) + "********" + this.substring(12)
 } else {
     this
+}
+
+/**
+ * @author Baudelio Andalon
+ * @sample imgItem.changeDrawable(R.drawable.newImg)
+ */
+fun ImageView.changeDrawable(drawable: Int) {
+    this.setImageDrawable(
+        ContextCompat.getDrawable(
+            CUAppInit.getAppContext(),
+            drawable
+        )
+    )
+}
+
+
+/**
+ * @author Baudelio Andalon
+ * @sample imgItem.changeImgColor(R.color.redColor)
+ */
+fun ImageView.changeImgColor(color: Int) {
+    this.drawable?.let {
+        DrawableCompat.setTint(
+            DrawableCompat.wrap(it),
+            ContextCompat.getColor(CUAppInit.getAppContext(), color)
+        )
+    }
+}
+
+/**
+ * @author Baudelio Andalon
+ * @sample edtName.maxLength(20)
+ * Definir el tamaño maximo de un editText
+ */
+fun EditText.maxLength(maxLength: Int) {
+    filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
+}
+
+
+/**
+ * @author Baudelio Andalon
+ * @sample edit.changeHintTextColor(R.color.redColor)
+ * Definir el color del hint de un EditText
+ */
+fun EditText.changeHintTextColor(color: Int, context: Context = CUAppInit.getAppContext()) {
+    setHintTextColor(ContextCompat.getColor(context, color))
+}
+
+/**
+ * @author Baudelio Andalon
+ * @sample tvName.changeTextColor(R.color.redColor)
+ * Cambiar el color de un textView
+ */
+fun TextView.changeTextColor(color: Int, context: Context = CUAppInit.getAppContext()) {
+    setTextColor(
+        ContextCompat.getColor(
+            context,
+            color
+        )
+    )
+}
+
+fun TextView.changeTypeFace(fontFamily: Int) {
+    typeface = ResourcesCompat.getFont(
+        CUAppInit.getAppContext(),
+        fontFamily
+    )
+}
+
+fun Button.changeTypeFace(fontFamily: Int) {
+    typeface = ResourcesCompat.getFont(
+        CUAppInit.getAppContext(),
+        fontFamily
+    )
+}
+
+/**
+ *
+ * */
+fun TextView.changeFontSizeColorText(
+    fontFamily: Int? = null,
+    sizeInDP: Int? = null,
+    color: Int? = null, textString: String? = null
+) {
+    fontFamily?.let {
+        changeTypeFace(it)
+    }
+    sizeInDP?.let {
+        changeTextSize(it)
+    }
+    color?.let {
+        changeTextColor(it)
+    }
+    textString?.let {
+        text = it
+    }
+}
+
+fun TextView.changeTextSize(sizeInDP: Int) {
+    this.setTextSize(TypedValue.COMPLEX_UNIT_DIP, sizeInDP.toFloat())
+}
+
+fun Button.changeTextSize(sizeInDP: Int) {
+    this.setTextSize(TypedValue.COMPLEX_UNIT_DIP, sizeInDP.toFloat())
 }
 
 fun FragmentActivity.disableBackButton() {
@@ -120,11 +242,32 @@ fun RealmObject.saveLocalData() {
     })
 }
 
+//Abrir otra actividad mandandole parametros o no
+inline fun <reified T : Activity> Activity.goToActivity(noinline init: Intent.() -> Unit = {}) {
+    val intent = Intent(this, T::class.java)
+    intent.init() //pasar parámetros
+    startActivity(intent)
+}
+
+
+fun getDeviceId(): String =
+    Settings.Secure.getString(CUAppInit.getAppContext().contentResolver, Settings.Secure.ANDROID_ID)
+
 fun RealmObject.autoGenerateId(primaryKey: String = "id"): Int {
     val currentIdNumber = CUAppInit.getRealmInstance().where(this::class.java).max(primaryKey)
     return if (currentIdNumber == null) {
         1
     } else {
         currentIdNumber.toInt() + 1
+    }
+}
+
+/**
+ * Ocultar teclado
+ * */
+fun Activity.hideKeyBoardFragment(vieww: View?) = run {
+    if (vieww != null) {
+        val input = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.hideSoftInputFromWindow(vieww.windowToken, 0)
     }
 }
