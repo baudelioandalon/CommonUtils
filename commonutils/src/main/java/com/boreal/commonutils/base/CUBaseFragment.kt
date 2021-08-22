@@ -25,7 +25,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
     }
 
     /**
-     * @author Daniel Garcia & Baudelio Andalon
+     * @author Baudelio Andalon
      * @since 21/09/2020
      * @see Obtener el layout
      */

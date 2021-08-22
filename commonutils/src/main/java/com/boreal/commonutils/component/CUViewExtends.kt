@@ -18,9 +18,10 @@ import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.boreal.commonutils.application.local.room.CUUserModel
 import com.boreal.commonutils.application.CUAppInit
+import com.boreal.commonutils.application.local.room.CUUserModel
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
 import io.realm.RealmObject
@@ -51,7 +52,7 @@ fun View.animateFadeIn(duration: Long = 350) {
         })
 }
 
-fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? =  null) {
+fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? = null) {
     var result: T?
     GlobalScope.launch(Dispatchers.IO) {
         result = withContext(Dispatchers.IO) {
@@ -218,7 +219,7 @@ fun <T> T.getData(keyValue: String) = CUAppInit.getCUSecurity().getData(keyValue
 fun <T> T.insertData() {
     GlobalScope.launch(Dispatchers.IO) {
         withContext(Dispatchers.IO) {
-            when(this@insertData){
+            when (this@insertData) {
                 is CUUserModel -> {
                     CUAppInit.getRoomInstance().userDao().insert(this@insertData)
                 }
@@ -245,6 +246,13 @@ fun RealmObject.saveLocalData() {
 //Abrir otra actividad mandandole parametros o no
 inline fun <reified T : Activity> Activity.goToActivity(noinline init: Intent.() -> Unit = {}) {
     val intent = Intent(this, T::class.java)
+    intent.init() //pasar parámetros
+    startActivity(intent)
+}
+
+//Abrir otra actividad mandandole parametros o no
+inline fun <reified T : Activity> Fragment.goToActivity(noinline init: Intent.() -> Unit = {}) {
+    val intent = Intent(requireContext(), T::class.java)
     intent.init() //pasar parámetros
     startActivity(intent)
 }
