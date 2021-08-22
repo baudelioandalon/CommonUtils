@@ -30,6 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Normalizer
+import java.util.*
 
 fun <T : View> T.hideView() {
     this.visibility = View.GONE
@@ -279,3 +280,6 @@ fun Activity.hideKeyBoardFragment(vieww: View?) = run {
         input.hideSoftInputFromWindow(vieww.windowToken, 0)
     }
 }
+
+fun randomID() = UUID.randomUUID().toString().replace('-', ' ')
+    .replace("\\s".toRegex(), "")
