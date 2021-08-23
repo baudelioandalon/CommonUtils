@@ -30,6 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Normalizer
+import java.text.NumberFormat
 import java.util.*
 
 fun <T : View> T.hideView() {
@@ -283,3 +284,7 @@ fun Activity.hideKeyBoardFragment(vieww: View?) = run {
 
 fun randomID() = UUID.randomUUID().toString().replace('-', ' ')
     .replace("\\s".toRegex(), "")
+
+fun String.formatSalaryAmount(salaryAmount: Long) = NumberFormat.getCurrencyInstance(Locale.US)
+    .format((this )).replace("€", "").trim().trimIndent()
+    .replace("$", "").takeWhile { it != '.' }
