@@ -285,6 +285,6 @@ fun Activity.hideKeyBoardFragment(vieww: View?) = run {
 fun randomID() = UUID.randomUUID().toString().replace('-', ' ')
     .replace("\\s".toRegex(), "")
 
-fun String.formatSalaryAmount(salaryAmount: Long) = NumberFormat.getCurrencyInstance(Locale.US)
-    .format((this )).replace("€", "").trim().trimIndent()
+fun Long.formatSalaryAmount() = NumberFormat.getCurrencyInstance(Locale.US)
+    .format((this)).replace("€", "").trim().trimIndent()
     .replace("$", "").takeWhile { it != '.' }
