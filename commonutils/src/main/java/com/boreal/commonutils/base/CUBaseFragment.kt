@@ -13,7 +13,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.boreal.commonutils.component.disableBackButton
 import kotlin.reflect.KClass
 
-abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) : Fragment() {
+abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) :
+    Fragment() {
 
     lateinit var CUBackHandler: CUBackHandler
     private var listenerBackPress: BACUBackFragment? = null
@@ -39,7 +40,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        mBinding = DataBindingUtil.inflate(inflater,getLayout(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
 
         initDependency(savedInstanceState)
         initObservers()
@@ -56,11 +57,11 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * @param message: String?
      * @param isCancelable: Boolean
      */
-    fun showProgressBarCustom(message: String? = null, isCancelable: Boolean = false){
+    fun showProgressBarCustom(message: String? = null, isCancelable: Boolean = false) {
         CUBackHandler.showProgressBarCustom(message, isCancelable)
     }
 
-    fun disableBackButton(){
+    fun disableBackButton() {
         requireActivity().disableBackButton()
     }
 
@@ -68,11 +69,11 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * @author DanielGC
      * @see Oculta el progressbar
      */
-    fun hideProgressBarCustom(){
+    fun hideProgressBarCustom() {
         CUBackHandler.hideProgressBarCustom()
     }
 
-    fun setBACUBackFragment(listenerBackPress: BACUBackFragment){
+    fun setBACUBackFragment(listenerBackPress: BACUBackFragment) {
         this.listenerBackPress = listenerBackPress
     }
 
@@ -83,20 +84,24 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
         CUBackHandler.hideKeyBoard()
     }
 
-    fun showLottie(lottie: LottieAnimationView,
-                   containerPersonality: View,
-                   containerParent: View, show: Boolean){
-        CUBackHandler.showLottie(lottie,
+    fun showLottie(
+        lottie: LottieAnimationView,
+        containerPersonality: View,
+        containerParent: View, show: Boolean
+    ) {
+        CUBackHandler.showLottie(
+            lottie,
             containerPersonality,
-            containerParent, show)
+            containerParent, show
+        )
     }
 
     /**
      * Acción que se ejecuta cuando se detecta que se preciona el boton de back de android,
      * esta funcion es llamda desde base activity
      */
-    fun onFragmentBackPressed(): Boolean{
-        if(listenerBackPress != null)
+    fun onFragmentBackPressed(): Boolean {
+        if (listenerBackPress != null)
             listenerBackPress?.onBackPress()
 
         return false
