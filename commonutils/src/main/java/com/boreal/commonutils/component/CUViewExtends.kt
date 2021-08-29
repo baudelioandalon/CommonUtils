@@ -10,10 +10,7 @@ import android.text.InputFilter
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -30,7 +27,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Normalizer
-import java.text.NumberFormat
 import java.util.*
 
 fun <T : View> T.hideView() {
@@ -52,6 +48,10 @@ fun View.animateFadeIn(duration: Long = 350) {
                 this@animateFadeIn.animate().setListener(null)
             }
         })
+}
+
+fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }
 
 fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? = null) {
