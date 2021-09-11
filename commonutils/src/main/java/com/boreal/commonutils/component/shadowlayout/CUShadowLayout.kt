@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.FloatRange
 import com.boreal.commonutils.R
-import com.boreal.commonutils.component.animateFadeIn
-import com.boreal.commonutils.component.doSync
 
 
 class CUShadowLayout @JvmOverloads constructor(
@@ -22,7 +19,7 @@ class CUShadowLayout @JvmOverloads constructor(
         init {
             isDither = true
             isFilterBitmap = true
-            this@CUShadowLayout.visibility = View.GONE
+//            this@CUShadowLayout.visibility = View.GONE
         }
     }
 
@@ -205,30 +202,23 @@ class CUShadowLayout @JvmOverloads constructor(
 
         // Retrieve attributes from xml
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CUShadowLayout)
-        doSync(
-            {
-                try {
-                    isShadowed = typedArray.getBoolean(R.styleable.CUShadowLayout_sl_shadowed, true)
-                    shadowRadius = typedArray.getDimension(
-                        R.styleable.CUShadowLayout_sl_shadow_radius, DEFAULT_SHADOW_RADIUS
-                    )
-                    shadowDistance = typedArray.getDimension(
-                        R.styleable.CUShadowLayout_sl_shadow_distance, DEFAULT_SHADOW_DISTANCE
-                    )
-                    shadowAngle = typedArray.getInteger(
-                        R.styleable.CUShadowLayout_sl_shadow_angle, DEFAULT_SHADOW_ANGLE.toInt()
-                    )
-                        .toFloat()
-                    shadowColor = typedArray.getColor(
-                        R.styleable.CUShadowLayout_sl_shadow_color, DEFAULT_SHADOW_COLOR
-                    )
-                } finally {
-                    typedArray.recycle()
-                }
-            }, {
-                this@CUShadowLayout.visibility = VISIBLE
-                this.animateFadeIn()
-            }
-        )
+        try {
+            isShadowed = typedArray.getBoolean(R.styleable.CUShadowLayout_sl_shadowed, true)
+            shadowRadius = typedArray.getDimension(
+                R.styleable.CUShadowLayout_sl_shadow_radius, DEFAULT_SHADOW_RADIUS
+            )
+            shadowDistance = typedArray.getDimension(
+                R.styleable.CUShadowLayout_sl_shadow_distance, DEFAULT_SHADOW_DISTANCE
+            )
+            shadowAngle = typedArray.getInteger(
+                R.styleable.CUShadowLayout_sl_shadow_angle, DEFAULT_SHADOW_ANGLE.toInt()
+            )
+                .toFloat()
+            shadowColor = typedArray.getColor(
+                R.styleable.CUShadowLayout_sl_shadow_color, DEFAULT_SHADOW_COLOR
+            )
+        } finally {
+            typedArray.recycle()
+        }
     }
 }
