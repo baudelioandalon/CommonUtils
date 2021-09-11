@@ -284,3 +284,5 @@ fun Activity.hideKeyBoardFragment(vieww: View?) = run {
 
 fun randomID() = UUID.randomUUID().toString().replace('-', ' ')
     .replace("\\s".toRegex(), "")
+
+fun randomNumberId() = (10000..99999).random()

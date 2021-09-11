@@ -5,6 +5,8 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import com.boreal.commonutils.component.cutextfield.CUTextField
+import java.util.*
+import kotlin.collections.ArrayList
 
 fun CUTextField.addFilterNotCharacterSpecial(exceptionType: Any? = null) {
     editText.filters = editText.filters + filterNotCharacterSpecial(exceptionType)
@@ -86,4 +88,18 @@ private fun isCharacterAccepted(c: Char, charactersAccepted: ArrayList<Char>? = 
         }
     }
     return result
+}
+
+fun String.capitalizeName(): String {
+    val chars = toLowerCase(Locale.ROOT).toCharArray()
+    var found = false
+    for (i in chars.indices) {
+        if (!found && Character.isLetter(chars[i])) {
+            chars[i] = Character.toUpperCase(chars[i])
+            found = true
+        } else if (Character.isWhitespace(chars[i]) || chars[i] == '.' || chars[i] == '\'') { // You can add other chars here
+            found = false
+        }
+    }
+    return String(chars)
 }

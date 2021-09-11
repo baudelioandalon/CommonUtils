@@ -16,8 +16,8 @@ import kotlin.reflect.KClass
 abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) :
     Fragment() {
 
-    lateinit var CUBackHandler: CUBackHandler
-    private var listenerBackPress: BACUBackFragment? = null
+    lateinit var cuBackHandler: CUBackHandler
+    private var listenerBackPress: CUBackFragment? = null
 
     lateinit var mBinding: T
 
@@ -45,7 +45,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
         initDependency(savedInstanceState)
         initObservers()
         if (activity is CUBackHandler) {
-            CUBackHandler = activity as CUBackHandler
+            cuBackHandler = activity as CUBackHandler
         }
         initView()
         return mBinding.root
@@ -58,7 +58,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * @param isCancelable: Boolean
      */
     fun showProgressBarCustom(message: String? = null, isCancelable: Boolean = false) {
-        CUBackHandler.showProgressBarCustom(message, isCancelable)
+        cuBackHandler.showProgressBarCustom(message, isCancelable)
     }
 
     fun disableBackButton() {
@@ -70,10 +70,10 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * @see Oculta el progressbar
      */
     fun hideProgressBarCustom() {
-        CUBackHandler.hideProgressBarCustom()
+        cuBackHandler.hideProgressBarCustom()
     }
 
-    fun setBACUBackFragment(listenerBackPress: BACUBackFragment) {
+    fun setBackFragment(listenerBackPress: CUBackFragment) {
         this.listenerBackPress = listenerBackPress
     }
 
@@ -81,7 +81,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * @author DanielGC
      */
     fun hideKeyboard() {
-        CUBackHandler.hideKeyBoard()
+        cuBackHandler.hideKeyBoard()
     }
 
     fun showLottie(
@@ -89,7 +89,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
         containerPersonality: View,
         containerParent: View, show: Boolean
     ) {
-        CUBackHandler.showLottie(
+        cuBackHandler.showLottie(
             lottie,
             containerPersonality,
             containerParent, show
@@ -98,12 +98,10 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
 
     /**
      * Acción que se ejecuta cuando se detecta que se preciona el boton de back de android,
-     * esta funcion es llamda desde base activity
+     * esta funcion es llamada desde base activity
      */
     fun onFragmentBackPressed(): Boolean {
-        if (listenerBackPress != null)
-            listenerBackPress?.onBackPress()
-
+        listenerBackPress?.onBackPress()
         return false
     }
 
@@ -111,7 +109,7 @@ abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vk
      * Interface que se implementa en cada fragmento que requiera aplicar una
      * funcionalidad cuando se detecte que se preciono el boton de back
      */
-    interface BACUBackFragment {
+    interface CUBackFragment {
         fun onBackPress()
     }
 
