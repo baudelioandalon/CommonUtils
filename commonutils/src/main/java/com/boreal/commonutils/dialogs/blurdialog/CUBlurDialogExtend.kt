@@ -11,7 +11,7 @@ import com.boreal.commonutils.application.CUAppInit
 fun CUBlurDialog.initElement(view: View) {
     if (resource == null) {
         view.let { vista ->
-            CUTitleModel?.let { title ->
+            cuTitleModel?.let { title ->
                 vista.findViewById<ImageView>(R.id.imgGeneric).apply {
                     if (title.titleType == CUTitleType.SUCCESS) {
                         setImageDrawable(

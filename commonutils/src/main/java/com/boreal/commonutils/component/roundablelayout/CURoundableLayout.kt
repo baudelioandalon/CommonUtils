@@ -131,40 +131,40 @@ class CURoundableLayout : ConstraintLayout {
         attrs?.let {
 
             /** set corner radii */
-            context.obtainStyledAttributes(it, R.styleable.RoundableLayout).apply {
+            context.obtainStyledAttributes(it, R.styleable.CURoundableLayout).apply {
                 cornerLeftTop =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerLeftTop, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerLeftTop, 0)
                         .toFloat()
                 cornerRightTop =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerRightTop, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerRightTop, 0)
                         .toFloat()
                 cornerLeftBottom =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerLeftBottom, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerLeftBottom, 0)
                         .toFloat()
                 cornerRightBottom =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerRightBottom, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerRightBottom, 0)
                         .toFloat()
                 backgroundColor =
-                    this.getColor(R.styleable.RoundableLayout_backgroundColor, Color.WHITE)
+                    getColor(R.styleable.CURoundableLayout_cu_backgroundColor, Color.WHITE)
                 strokeLineWidth =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_strokeLineWidth, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_strokeLineWidth, 0)
                         .toFloat()
                 strokeLineColor =
-                    this.getColor(R.styleable.RoundableLayout_strokeLineColor, Color.BLACK)
+                    getColor(R.styleable.CURoundableLayout_cu_strokeLineColor, Color.BLACK)
                 dashLineWidth =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_dashLineWidth, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_dashLineWidth, 0)
                         .toFloat()
                 dashLineGap =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_dashLineGap, 0).toFloat()
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_dashLineGap, 0).toFloat()
                 cornerLeftSide =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerLeftSide, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerLeftSide, 0)
                         .toFloat()
                 cornerRightSide =
-                    this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerRightSide, 0)
+                    getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerRightSide, 0)
                         .toFloat()
-                if (this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerAll, 0) != 0) {
+                if (getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerAll, 0) != 0) {
                     val roundedSize =
-                        this.getDimensionPixelSize(R.styleable.RoundableLayout_cornerAll, 0)
+                        getDimensionPixelSize(R.styleable.CURoundableLayout_cu_cornerAll, 0)
                             .toFloat()
                     cornerRightSide = roundedSize
                     cornerLeftSide = roundedSize

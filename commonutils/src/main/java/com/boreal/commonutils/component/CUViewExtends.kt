@@ -21,6 +21,8 @@ import com.boreal.commonutils.application.CUAppInit
 import com.boreal.commonutils.application.local.room.CUUserModel
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
+import com.squareup.picasso.Picasso
+import com.stfalcon.imageviewer.StfalconImageViewer
 import io.realm.RealmObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -52,6 +54,28 @@ fun View.animateFadeIn(duration: Long = 350) {
 
 fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
+}
+
+fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(context, message, duration).show()
+}
+
+fun Activity.showImageViewer(listImages: ArrayList<String>) {
+    StfalconImageViewer.Builder(
+        this,
+        listImages
+    ) { view, image ->
+        Picasso.get().load(image).into(view)
+    }.show()
+}
+
+fun Fragment.showImageViewer(listImages: ArrayList<String>) {
+    StfalconImageViewer.Builder(
+        context,
+        listImages
+    ) { view, image ->
+        Picasso.get().load(image).into(view)
+    }.show()
 }
 
 fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? = null) {

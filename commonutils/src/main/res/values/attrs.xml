@@ -45,21 +45,21 @@
         <attr name="sl_shadow_color" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="RoundableLayout">
-        <attr name="cornerLeftTop" format="dimension" />
-        <attr name="cornerRightTop" format="dimension" />
-        <attr name="cornerLeftBottom" format="dimension" />
-        <attr name="cornerRightBottom" format="dimension" />
-        <attr name="backgroundColor" format="color" />
-        <attr name="strokeLineWidth" format="dimension" />
-        <attr name="strokeLineColor" format="color" />
-        <attr name="dashLineWidth" format="dimension" />
-        <attr name="dashLineGap" format="dimension" />
+    <declare-styleable name="CURoundableLayout">
+        <attr name="cu_cornerLeftTop" format="dimension" />
+        <attr name="cu_cornerRightTop" format="dimension" />
+        <attr name="cu_cornerLeftBottom" format="dimension" />
+        <attr name="cu_cornerRightBottom" format="dimension" />
+        <attr name="cu_backgroundColor" format="color" />
+        <attr name="cu_strokeLineWidth" format="dimension" />
+        <attr name="cu_strokeLineColor" format="color" />
+        <attr name="cu_dashLineWidth" format="dimension" />
+        <attr name="cu_dashLineGap" format="dimension" />
 
-        <attr name="cornerLeftSide" format="dimension" />
-        <attr name="cornerRightSide" format="dimension" />
+        <attr name="cu_cornerLeftSide" format="dimension" />
+        <attr name="cu_cornerRightSide" format="dimension" />
 
-        <attr name="cornerAll" format="dimension" />
+        <attr name="cu_cornerAll" format="dimension" />
     </declare-styleable>
 
 </resources>

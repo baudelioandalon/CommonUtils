@@ -15,7 +15,7 @@ import com.boreal.commonutils.R
 
 open class CUBlurDialog constructor(
     @LayoutRes val resource: Int? = null,
-    val CUTitleModel: CUTitleModel? = null,
+    val cuTitleModel: CUTitleModel? = null,
     val messageGeneric: String? = null,
     val messageGenericResource: Spanned? = null,
     val buttonType: ButtonType? = null,
