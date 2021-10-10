@@ -18,7 +18,6 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.boreal.commonutils.application.CUAppInit
-import com.boreal.commonutils.application.local.room.CUUserModel
 import com.boreal.commonutils.common.encrypt.CUKeysSecurity
 import com.boreal.commonutils.common.encrypt.rsa.cifrados.CUEncryptDecrypt
 import com.squareup.picasso.Picasso
@@ -30,6 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Normalizer
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 fun <T : View> T.hideView() {
     this.visibility = View.GONE
@@ -78,13 +78,17 @@ fun Fragment.showImageViewer(listImages: ArrayList<String>) {
     }.show()
 }
 
-fun <T> doSync(method: () -> T, methodAfter: ((param: T) -> Unit)? = null) {
+fun <T> doSync(
+    method: () -> T,
+    methodAfter: ((param: T) -> Unit)? = null,
+    thread: CoroutineContext = Dispatchers.IO
+) {
     var result: T?
-    GlobalScope.launch(Dispatchers.IO) {
-        result = withContext(Dispatchers.IO) {
+    GlobalScope.launch(thread) {
+        result = withContext(thread) {
             method()
         }
-        withContext(Dispatchers.IO) {
+        withContext(thread) {
             methodAfter?.invoke(result as T)
         }
 
@@ -242,32 +246,28 @@ fun <T : Any> T.saveData(keyValue: String) = CUAppInit.getCUSecurity().saveData(
 
 fun <T> T.getData(keyValue: String) = CUAppInit.getCUSecurity().getData(keyValue, this as Any) as T
 
-fun <T> T.insertData() {
-    GlobalScope.launch(Dispatchers.IO) {
-        withContext(Dispatchers.IO) {
-            when (this@insertData) {
-                is CUUserModel -> {
-                    CUAppInit.getRoomInstance().userDao().insert(this@insertData)
-                }
-            }
-        }
+//fun <T> T.insertData() {
+//    GlobalScope.launch(Dispatchers.IO) {
+//        withContext(Dispatchers.IO) {
+//            when (this@insertData) {
+//                is CUUserModel -> {
+//                    CUAppInit.getRoomInstance().userDao().insert(this@insertData)
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+fun RealmObject.saveLocal() {
+    CUAppInit.getRealmInstance().executeTransaction { realm ->
+        realm.insertOrUpdate(this)
     }
 }
 
-fun RealmObject.saveLocalData() {
-    doSync({
-        try {
-            CUAppInit.getRealmInstance().apply {
-                beginTransaction()
-                copyToRealmOrUpdate(this@saveLocalData)
-                commitTransaction()
-            }
-            true
-        } catch (e: Exception) {
-            false
-        }
-    })
-}
+inline fun <reified T : RealmObject> getLocal() =
+    CUAppInit.getRealmInstance().where(T::class.java).findAll()
+
 
 //Abrir otra actividad mandandole parametros o no
 inline fun <reified T : Activity> Activity.goToActivity(noinline init: Intent.() -> Unit = {}) {

@@ -7,15 +7,15 @@ import com.boreal.commonutils.dagger.components.DaggerCUApplicationComponent
 import com.boreal.commonutils.dagger.modules.CUApplicationModule
 import java.io.File
 
-open class CUAppInit {
+open class CUAppInit : Application() {
 
     fun init(application: Application, applicationContext: Context) {
 //        deleteCache(applicationContext)
 //        applicationContext.cacheDir.deleteRecursively()
         appGlobal = DaggerCUApplicationComponent
-        .builder()
-        .cUApplicationModule(CUApplicationModule(application, applicationContext))
-        .build()
+            .builder()
+            .cUApplicationModule(CUApplicationModule(application, applicationContext))
+            .build()
     }
 
     open fun deleteCache(context: Context) {
@@ -48,9 +48,9 @@ open class CUAppInit {
     /**
      *@see -> Se declaran constantes para acceder al valor sin crear una instancia de la clase
      */
-    companion object: CUAppInit(){
+    companion object : CUAppInit() {
 
-        lateinit var appGlobal : CUApplicationComponent
+        lateinit var appGlobal: CUApplicationComponent
 
         fun getAppContext() = appGlobal.context()
 

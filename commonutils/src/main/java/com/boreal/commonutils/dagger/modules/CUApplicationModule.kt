@@ -43,6 +43,8 @@ class CUApplicationModule @Inject constructor(private val application : Applicat
         val config = RealmConfiguration.Builder()
             .name("realm-database.db")
             .deleteRealmIfMigrationNeeded()
+            .allowWritesOnUiThread(true)
+            .allowQueriesOnUiThread(true)
             .schemaVersion(0)
             .build()
         Realm.setDefaultConfiguration(config)
