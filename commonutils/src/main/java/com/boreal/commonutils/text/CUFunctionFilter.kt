@@ -103,3 +103,12 @@ fun String.capitalizeName(): String {
     }
     return String(chars)
 }
+
+
+fun String.uniqueName(numberOfName: Int = 1) = if (!contains(" ")) {
+    this
+} else if (numberOfName == 1) {
+    substringBefore(" ")
+} else {
+    substringAfter(" ")
+}
