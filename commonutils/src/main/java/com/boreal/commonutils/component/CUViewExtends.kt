@@ -61,21 +61,27 @@ fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 }
 
 fun Activity.showImageViewer(listImages: ArrayList<String>) {
-    StfalconImageViewer.Builder(
-        this,
-        listImages
-    ) { view, image ->
-        Picasso.get().load(image).into(view)
-    }.show()
+    listImages.filter { it != "NONE" && it != "" }.apply {
+        if(isEmpty()) return@apply showToast("No hay imagen para mostrar")
+        StfalconImageViewer.Builder(
+            this@showImageViewer,
+            this
+        ) { view, image ->
+            Picasso.get().load(image).into(view)
+        }.show()
+    }
 }
 
 fun Fragment.showImageViewer(listImages: ArrayList<String>) {
-    StfalconImageViewer.Builder(
-        context,
-        listImages
-    ) { view, image ->
-        Picasso.get().load(image).into(view)
-    }.show()
+    listImages.filter { it != "NONE" && it != "" }.apply {
+        if(isEmpty()) return@apply showToast("No hay imagen para mostrar")
+        StfalconImageViewer.Builder(
+            context,
+            this
+        ) { view, image ->
+            Picasso.get().load(image).into(view)
+        }.show()
+    }
 }
 
 fun <T> doSync(
