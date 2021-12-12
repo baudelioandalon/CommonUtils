@@ -59,6 +59,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
     private var defaultSizeInteger = 1f
     private var defaultSizeDot = 1f
     private var defaultSizeDecimal = 0.6f
+    private var changedByMethod = false
 
     /**
      * Detecta cambios en el componenete, regresa 4 parametros
@@ -67,7 +68,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
      * decimals: String Ejemplo = 32
      * amountElement: Float Ejemplo 1000.32
      */
-    lateinit var onValueChanged: (valueWithFormat: String, valueInInteger: Int, amountElement: Float) -> Unit
+    lateinit var onValueChanged: (valueWithFormat: String, valueInInteger: Int, amountElement: Float, valueChangedMethod: Boolean) -> Unit
 
     private val txtCashSimbol: MaterialTextView by lazy {
         findViewById(R.id.cashSimbol)
@@ -102,6 +103,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
 
 
     fun setValueInt(valueInString: String) {
+        changedByMethod = true
         if (valueInString.length > 7) {
             txtCashSimbol.textSize = 20F
             edtIntegers.textSize = 40F
@@ -112,6 +114,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
     }
 
     fun setAmount(valueInString: String) {
+        changedByMethod = true
         edtIntegers.apply {
             amountStr += valueInString
                 .replace(",", "")
@@ -499,8 +502,9 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
                                     onValueChanged.invoke(
                                         getAmountWithFormat(),
                                         getIntegers(),
-                                        getAmount()
+                                        getAmount(), changedByMethod
                                     )
+                                    changedByMethod = false
                                 }
                             }
 
@@ -511,8 +515,10 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
                             onValueChanged.invoke(
                                 getAmountWithFormat(),
                                 getIntegers(),
-                                getAmount()
+                                getAmount(),
+                                changedByMethod
                             )
+                            changedByMethod = false
                         }
                     }
 
