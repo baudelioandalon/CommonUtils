@@ -67,7 +67,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
      * decimals: String Ejemplo = 32
      * amountElement: Float Ejemplo 1000.32
      */
-    lateinit var onValueChanged: (valueInString: String, integers: String, amountElement: Float) -> Unit
+    lateinit var onValueChanged: (valueWithFormat: String, valueInInteger: Int, amountElement: Float) -> Unit
 
     private val txtCashSimbol: MaterialTextView by lazy {
         findViewById(R.id.cashSimbol)
@@ -296,7 +296,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
     }
 
 
-    fun getAmountString() =
+    fun getAmountWithFormat() =
         if (edtIntegers.text.toString().isNotEmpty()) {
             "$${edtIntegers.text}"
         } else {
@@ -497,8 +497,8 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
 
                                 if (this::onValueChanged.isInitialized) {
                                     onValueChanged.invoke(
-                                        getAmountString(),
-                                        getIntegerString(),
+                                        getAmountWithFormat(),
+                                        getIntegers(),
                                         getAmount()
                                     )
                                 }
@@ -509,8 +509,8 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
                         amount = 0F
                         if (this::onValueChanged.isInitialized) {
                             onValueChanged.invoke(
-                                getAmountString(),
-                                getIntegerString(),
+                                getAmountWithFormat(),
+                                getIntegers(),
                                 getAmount()
                             )
                         }

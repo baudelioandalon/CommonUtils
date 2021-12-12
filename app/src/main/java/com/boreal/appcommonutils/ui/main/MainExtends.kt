@@ -20,17 +20,18 @@ fun MainActivity.initElements(){
             Log.e("string", data.toString())
         }
 
-        btnFloat.setOnSingleClickListener {
-            showToast(txtInputElement.getAmount().toString())
-        }
-        btnString.setOnSingleClickListener {
-            showToast(txtInputElement.getAmountString())
-        }
+
         btnInts.setOnSingleClickListener {
             showToast(txtInputElement.getIntegers().toString())
         }
         btnIntegerWithFormat.setOnSingleClickListener {
             showToast(txtInputElement.getIntegerString())
+        }
+        btnString.setOnSingleClickListener {
+            showToast(txtInputElement.getAmountWithFormat())
+        }
+        btnFloat.setOnSingleClickListener {
+            showToast(txtInputElement.getAmount().toString())
         }
     }
 }
