@@ -62,4 +62,23 @@
         <attr name="cu_cornerAll" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="CUNumberAmount">
+
+        <attr name="na_behavior" format="boolean" />
+        <attr name="na_isEnabled" format="boolean" />
+        <attr name="na_complete_color" format="color" />
+        <attr name="na_complete_size" format="integer" />
+        <attr name="na_cash_simbol_color" format="color" />
+        <attr name="na_cash_simbol_size" format="integer" />
+        <attr name="na_cash_simbol_gravity">
+            <flag name="top" value="1" />
+            <flag name="center" value="2" />
+            <flag name="bottom" value="3" />
+        </attr>
+        <attr name="na_integer_color" format="color" />
+        <attr name="na_integer_size" format="integer" />
+        <attr name="na_max_length" format="integer|reference" />
+
+    </declare-styleable>
+
 </resources>

@@ -19,4 +19,6 @@
     <string name="countdown_in_zero">0:00</string>
     <string name="coinid">Código de confirmación caducado</string>
     <string name="message_codephone">que te enviamos vía sms a tu celular</string>
+    <string name="cash_simbol">$</string>
+    <string name="_0">0</string>
 </resources>

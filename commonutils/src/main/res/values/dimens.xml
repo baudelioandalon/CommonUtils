@@ -32,5 +32,6 @@
     <dimen name="text_size_22">22sp</dimen>
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_26">26sp</dimen>
+    <dimen name="text_size_50">50sp</dimen>
 
 </resources>
