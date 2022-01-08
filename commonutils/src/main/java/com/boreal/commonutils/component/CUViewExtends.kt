@@ -32,11 +32,19 @@ import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 fun <T : View> T.hideView() {
-    this.visibility = View.GONE
+    visibility = View.GONE
 }
 
 fun <T : View> T.showView() {
-    this.visibility = View.VISIBLE
+    visibility = View.VISIBLE
+}
+
+fun <T : View> T.showIf(sentence: Boolean) {
+    visibility = if (sentence) View.VISIBLE else View.GONE
+}
+
+fun <T : View> T.hideIf(sentence: Boolean) {
+    visibility = if (sentence) View.GONE else View.VISIBLE
 }
 
 fun View.animateFadeIn(duration: Long = 350) {
@@ -62,7 +70,7 @@ fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 
 fun Activity.showImageViewer(listImages: ArrayList<String>) {
     listImages.filter { it != "NONE" && it != "" }.apply {
-        if(isEmpty()) return@apply showToast("No hay imagen para mostrar")
+        if (isEmpty()) return@apply showToast("No hay imagen para mostrar")
         StfalconImageViewer.Builder(
             this@showImageViewer,
             this
@@ -74,7 +82,7 @@ fun Activity.showImageViewer(listImages: ArrayList<String>) {
 
 fun Fragment.showImageViewer(listImages: ArrayList<String>) {
     listImages.filter { it != "NONE" && it != "" }.apply {
-        if(isEmpty()) return@apply showToast("No hay imagen para mostrar")
+        if (isEmpty()) return@apply showToast("No hay imagen para mostrar")
         StfalconImageViewer.Builder(
             context,
             this
@@ -138,7 +146,7 @@ fun String.maskCardNumber() = if (this.length == 16) {
  * @sample imgItem.changeDrawable(R.drawable.newImg)
  */
 fun ImageView.changeDrawable(drawable: Int) {
-    this.setImageDrawable(
+    setImageDrawable(
         ContextCompat.getDrawable(
             CUAppInit.getAppContext(),
             drawable
