@@ -1,10 +1,10 @@
 package com.boreal.appcommonutils.ui.main
 
 import android.util.Log
-import com.boreal.commonutils.component.getData
-import com.boreal.commonutils.component.saveData
-import com.boreal.commonutils.component.setOnSingleClickListener
-import com.boreal.commonutils.component.showToast
+import com.boreal.commonutils.extensions.getData
+import com.boreal.commonutils.extensions.saveData
+import com.boreal.commonutils.extensions.setOnSingleClickListener
+import com.boreal.commonutils.extensions.showToast
 
 fun MainActivity.initElements(){
 

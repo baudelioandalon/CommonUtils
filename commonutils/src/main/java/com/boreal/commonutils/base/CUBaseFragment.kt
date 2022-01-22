@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
-import com.boreal.commonutils.component.disableBackButton
+import com.boreal.commonutils.extensions.disableBackButton
 import kotlin.reflect.KClass
 
 abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) :

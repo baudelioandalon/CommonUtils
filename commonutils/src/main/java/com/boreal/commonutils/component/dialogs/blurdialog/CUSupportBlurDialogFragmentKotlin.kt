@@ -11,7 +11,6 @@ import fr.tvbarthel.lib.blurdialogfragment.BlurDialogEngine
 
 abstract class CUSupportBlurDialogFragmentKotlin : DialogFragment() {
 
-
     private var mBlurEngine: BlurDialogEngine? = null
     private var mToolbar: Toolbar? = null
     private var mDimmingEffect = false

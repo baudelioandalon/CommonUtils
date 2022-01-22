@@ -13,10 +13,13 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.boreal.commonutils.R
-import com.boreal.commonutils.component.*
+import com.boreal.commonutils.extensions.changeHintTextColor
+import com.boreal.commonutils.extensions.changeTextColor
+import com.boreal.commonutils.extensions.changeTextSize
+import com.boreal.commonutils.extensions.maxLength
 import com.google.android.material.textview.MaterialTextView
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 
 /**
@@ -446,7 +449,7 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
         var edited = false
         if (defaultBehavior) {
             edtIntegers.setMaxLength(maxValue)
-            edtIntegers.doOnTextChanged { s, start, before, count ->
+            edtIntegers.doOnTextChanged { s, _, _, _ ->
                 if (!edited) {
                     if (!s.isNullOrEmpty()) {
                         if (s.toString() != current) {

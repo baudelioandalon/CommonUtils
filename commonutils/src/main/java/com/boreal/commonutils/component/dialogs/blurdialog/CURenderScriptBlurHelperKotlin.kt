@@ -2,7 +2,11 @@ package com.boreal.commonutils.component.dialogs.blurdialog
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.renderscript.*
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RSRuntimeException
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import android.util.Log
 
 /**

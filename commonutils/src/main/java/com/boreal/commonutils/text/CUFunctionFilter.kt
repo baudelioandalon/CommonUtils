@@ -5,7 +5,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import com.boreal.commonutils.component.cutextfield.CUTextField
-import java.util.*
+import java.util.Locale
 import kotlin.collections.ArrayList
 
 fun CUTextField.addFilterNotCharacterSpecial(exceptionType: Any? = null) {

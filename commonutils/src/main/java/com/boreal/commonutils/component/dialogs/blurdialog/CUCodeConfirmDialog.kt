@@ -186,7 +186,7 @@ class CUCodeConfirmDialog constructor(
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        et.setOnKeyListener { v, keyCode, event ->
+        et.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_DEL && et.text.toString().isEmpty()) {
                 etPrevious?.requestFocus()
             }
