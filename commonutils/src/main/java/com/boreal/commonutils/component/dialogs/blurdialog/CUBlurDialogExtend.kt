@@ -7,13 +7,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.boreal.commonutils.R
 import com.boreal.commonutils.application.CUAppInit
+import com.boreal.commonutils.dialogs.blurdialog.CUBlurDialog
 
 fun CUBlurDialog.initElement(view: View) {
     if (resource == null) {
         view.let { vista ->
-            CUTitleModel?.let { title ->
+            cuTitleModel?.let { title ->
                 vista.findViewById<ImageView>(R.id.imgGeneric).apply {
-                    if (title.CUTitleType == CUTitleType.SUCCESS) {
+                    if (title.titleType == CUTitleType.SUCCESS) {
                         setImageDrawable(
                             ContextCompat.getDrawable(
                                 CUAppInit.getAppContext(),

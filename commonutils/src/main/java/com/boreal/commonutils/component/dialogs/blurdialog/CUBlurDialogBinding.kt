@@ -1,4 +1,4 @@
-package com.boreal.commonutils.component.dialogs.blurdialog
+package com.boreal.commonutils.dialogs.blurdialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -7,18 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.boreal.commonutils.component.dialogs.blurdialog.CUSupportBlurDialogFragmentKotlin
 
-abstract class CUBlurDialogBinding<B : ViewDataBinding> constructor(
-    private val callback: ((view: View) -> Unit)? = null,
+class CUBlurDialogBinding<B : ViewDataBinding> constructor(
+    @LayoutRes private val layout: Int,
     private val cancelable: Boolean = true,
+    private val callback: ((binding: B, dialog: DialogFragment) -> Unit)? = null,
 ) : CUSupportBlurDialogFragmentKotlin() {
 
     lateinit var mBinding: B
-
-    abstract fun getLayout(): Int
 
     override fun isDimmingEnabled(isDimmingEnabled: Boolean): Boolean = isDimmingEnabled
     override fun isActionBarBlurred(isActionBarBlurred: Boolean): Boolean = isActionBarBlurred
@@ -35,13 +37,13 @@ abstract class CUBlurDialogBinding<B : ViewDataBinding> constructor(
         savedInstanceState: Bundle?
     ): View? {
 
-        mBinding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
+        mBinding = DataBindingUtil.inflate(inflater, layout, container, false)
         isCancelable = cancelable
         if (dialog != null && dialog!!.window != null) {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         }
-        callback?.invoke(mBinding.root)
+        callback?.invoke(mBinding, this)
 
         return mBinding.root
     }
