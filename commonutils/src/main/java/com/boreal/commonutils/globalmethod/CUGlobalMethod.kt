@@ -12,6 +12,6 @@ fun randomID() = UUID.randomUUID().toString().replace('-', ' ')
 
 fun randomNumberId() = (10000..99999).random()
 
-private fun randomANID(sizeId: Int = 20) = List(sizeId) {
+fun randomANID(sizeId: Int = 20) = List(sizeId) {
     (('a'..'z') + ('A'..'Z') + ('0'..'9')).random()
 }.joinToString("")
