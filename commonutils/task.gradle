@@ -1,6 +1,7 @@
 def dirRootProject = "$buildDir/../../.."
 def directories =  [
-        "$dirRootProject/Altemis/commonutils"
+        "$dirRootProject/Altemis/commonutils",
+        "$dirRootProject/PuertoCorazon/commonutils"
 ]
 def nameFile = "commonutils"
 
