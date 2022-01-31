@@ -1,4 +1,4 @@
-package com.boreal.commonutils.dialogs.blurdialog
+package com.boreal.commonutils.component.dialogs.blurdialog
 
 import android.app.Dialog
 import android.graphics.Color
@@ -12,10 +12,6 @@ import android.view.Window
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentManager
 import com.boreal.commonutils.R
-import com.boreal.commonutils.component.dialogs.blurdialog.ButtonType
-import com.boreal.commonutils.component.dialogs.blurdialog.CUSupportBlurDialogFragmentKotlin
-import com.boreal.commonutils.component.dialogs.blurdialog.CUTitleModel
-import com.boreal.commonutils.component.dialogs.blurdialog.initElement
 
 open class CUBlurDialog constructor(
     @LayoutRes val resource: Int? = null,
@@ -25,8 +21,8 @@ open class CUBlurDialog constructor(
     val buttonType: ButtonType? = null,
     private val callback: ((view: View) -> Unit)? = null,
     val buttonClicked: ((dialog: Dialog) -> Unit)? = null,
-    val buttonTopText : String ? = null,
-    val buttonCancelText : String ? = null,
+    val buttonTopText: String? = null,
+    val buttonCancelText: String? = null,
     val buttonCancelClicked: ((dialog: Dialog) -> Unit)? = null,
     private val cancelable: Boolean = true,
     private val blurLevel: Int = 8

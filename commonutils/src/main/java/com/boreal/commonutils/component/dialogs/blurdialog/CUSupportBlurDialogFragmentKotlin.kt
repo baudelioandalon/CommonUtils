@@ -7,44 +7,46 @@ import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import com.boreal.commonutils.R
-import fr.tvbarthel.lib.blurdialogfragment.BlurDialogEngine
 
 abstract class CUSupportBlurDialogFragmentKotlin : DialogFragment() {
 
-    private var mBlurEngine: BlurDialogEngine? = null
+    private var mCUBlurEngine: CUBlurDialogEngine? = null
     private var mToolbar: Toolbar? = null
     private var mDimmingEffect = false
 
-    abstract fun isDimmingEnabled (isDimmingEnabled: Boolean = false) : Boolean
-    abstract fun isActionBarBlurred(isActionBarBlurred: Boolean = false) : Boolean
-    abstract fun isRenderScriptEnabled(isRenderScriptEnabled: Boolean = false) : Boolean
+    abstract fun isDimmingEnabled(isDimmingEnabled: Boolean = false): Boolean
+    abstract fun isActionBarBlurred(isActionBarBlurred: Boolean = false): Boolean
+    abstract fun isRenderScriptEnabled(isRenderScriptEnabled: Boolean = false): Boolean
     abstract fun blurLevel(blurlevel: Int = 8): Int
-    abstract fun isDebugEnable(debugEnabled: Boolean = false) : Boolean
-    abstract fun downScaleFactor(downScaleFactor: Float = 4.0f) : Float
+    abstract fun isDebugEnable(debugEnabled: Boolean = false): Boolean
+    abstract fun downScaleFactor(downScaleFactor: Float = 4.0f): Float
 
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
-        if (mBlurEngine != null) {
-            mBlurEngine!!.onAttach(activity) // re attached
+        if (mCUBlurEngine != null) {
+            mCUBlurEngine!!.onAttach(activity) // re attached
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBlurEngine = BlurDialogEngine(requireActivity())
+        mCUBlurEngine =
+            CUBlurDialogEngine(
+                requireActivity()
+            )
         if (mToolbar != null) {
-            mBlurEngine!!.setToolbar(mToolbar)
+            mCUBlurEngine!!.setToolbar(mToolbar)
         }
         val radius = blurLevel()
         require(radius > 0) { "Blur radius must be strictly positive. Found : $radius" }
-        mBlurEngine!!.setBlurRadius(radius)
+        mCUBlurEngine!!.setBlurRadius(radius)
         val factor = downScaleFactor()
         require(factor > 1.0) { "Down scale must be strictly greater than 1.0. Found : $factor" }
-        mBlurEngine!!.setDownScaleFactor(factor)
-        mBlurEngine!!.setUseRenderScript(isRenderScriptEnabled())
-        mBlurEngine!!.debug(isDebugEnable())
-        if(isActionBarBlurred()){
-            mBlurEngine!!.setBlurActionBar(isActionBarBlurred())
+        mCUBlurEngine!!.setDownScaleFactor(factor)
+        mCUBlurEngine!!.setUseRenderScript(isRenderScriptEnabled())
+        mCUBlurEngine!!.debug(isDebugEnable())
+        if (isActionBarBlurred()) {
+            mCUBlurEngine!!.setBlurActionBar(isActionBarBlurred())
         }
         mDimmingEffect = isDimmingEnabled()
     }
@@ -70,17 +72,17 @@ abstract class CUSupportBlurDialogFragmentKotlin : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        mBlurEngine!!.onResume(retainInstance)
+        mCUBlurEngine!!.onResume(retainInstance)
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        mBlurEngine!!.onDismiss()
+        mCUBlurEngine!!.onDismiss()
     }
 
     override fun onDetach() {
         super.onDetach()
-        mBlurEngine!!.onDetach()
+        mCUBlurEngine!!.onDetach()
     }
 
     override fun onDestroyView() {
@@ -92,8 +94,8 @@ abstract class CUSupportBlurDialogFragmentKotlin : DialogFragment() {
 
     fun setToolbar(toolBar: Toolbar?) {
         mToolbar = toolBar
-        if (mBlurEngine != null) {
-            mBlurEngine!!.setToolbar(toolBar)
+        if (mCUBlurEngine != null) {
+            mCUBlurEngine!!.setToolbar(toolBar)
         }
     }
 
