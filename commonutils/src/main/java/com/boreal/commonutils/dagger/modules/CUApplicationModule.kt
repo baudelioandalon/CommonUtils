@@ -7,14 +7,14 @@ import com.boreal.commonutils.application.local.room.CURoomInstanceDatabase
 import com.boreal.commonutils.application.local.shared.CUSecurity
 import dagger.Module
 import dagger.Provides
-import io.realm.Realm
-import io.realm.RealmConfiguration
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class CUApplicationModule @Inject constructor(private val application : Application,
-                                              private val applicationContext: Context){
+class CUApplicationModule @Inject constructor(
+    private val application: Application,
+    private val applicationContext: Context
+) {
 
     @Provides
     @Singleton
@@ -26,7 +26,7 @@ class CUApplicationModule @Inject constructor(private val application : Applicat
 
     @Provides
     @Singleton
-    fun provideBACUSecurity(): CUSecurity = CUSecurity(applicationContext)
+    fun provideCUSecurity(): CUSecurity = CUSecurity(applicationContext)
 
     @Provides
     @Singleton
@@ -36,21 +36,21 @@ class CUApplicationModule @Inject constructor(private val application : Applicat
         "room-database"
     ).build()
 
-    @Provides
-    @Singleton
-    fun provideRealmInstance(): Realm {
-        Realm.init(applicationContext)
-        val config = RealmConfiguration.Builder()
-            .name("realm-database.db")
-            .deleteRealmIfMigrationNeeded()
-            .allowWritesOnUiThread(true)
-            .allowQueriesOnUiThread(true)
-            .schemaVersion(0)
-            .build()
-        Realm.setDefaultConfiguration(config)
-
-        return Realm.getDefaultInstance()
-    }
+//    @Provides
+//    @Singleton
+//    fun provideRealmInstance(): Realm {
+//        Realm.init(applicationContext)
+//        val config = RealmConfiguration.Builder()
+//            .name("realm-database.db")
+//            .deleteRealmIfMigrationNeeded()
+//            .allowWritesOnUiThread(true)
+//            .allowQueriesOnUiThread(true)
+//            .schemaVersion(0)
+//            .build()
+//        Realm.setDefaultConfiguration(config)
+//
+//        return Realm.getDefaultInstance()
+//    }
 
 
 }
