@@ -7,23 +7,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.boreal.commonutils.extensions.disableBackButton
 import kotlin.reflect.KClass
 
-abstract class CUBaseFragment<T : ViewDataBinding, V : ViewModel>(private val vkClass: KClass<V>) :
+abstract class CUBaseFragment<T : ViewDataBinding> :
     Fragment() {
 
     lateinit var cuBackHandler: CUBackHandler
     private var listenerBackPress: CUBackFragment? = null
 
     lateinit var mBinding: T
-
-    val viewModel by lazy {
-        ViewModelProvider(this).get(vkClass.javaObjectType)
-    }
 
     /**
      * @author Baudelio Andalon
