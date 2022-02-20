@@ -28,8 +28,8 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
      * @see Obtener el layout
      */
     abstract fun getLayout(): Int
-    abstract fun initDependency(savedInstanceState: Bundle?)
-    abstract fun initObservers()
+    open fun initDependency(savedInstanceState: Bundle? = null) {}
+    open fun initObservers(){}
     abstract fun initView()
 
     override fun onCreateView(
