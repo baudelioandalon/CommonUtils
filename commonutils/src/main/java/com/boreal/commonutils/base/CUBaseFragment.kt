@@ -20,7 +20,7 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
     lateinit var cuBackHandler: CUBackHandler
     private var listenerBackPress: CUBackFragment? = null
 
-    lateinit var mBinding: T
+    lateinit var binding: T
 
     /**
      * @author Baudelio Andalon
@@ -37,7 +37,7 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        mBinding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
+        binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
 
         initDependency(savedInstanceState)
         initObservers()
@@ -45,7 +45,7 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
             cuBackHandler = activity as CUBackHandler
         }
         initView()
-        return mBinding.root
+        return binding.root
     }
 
     /**

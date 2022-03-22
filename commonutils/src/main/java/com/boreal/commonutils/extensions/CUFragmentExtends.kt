@@ -26,6 +26,8 @@ fun Fragment.showImageViewer(listImages: ArrayList<String>) {
     }
 }
 
+fun Fragment.getSupportFragmentManager() = requireActivity().supportFragmentManager
+
 //Abrir otra actividad mandandole parametros o no
 inline fun <reified T : Activity> Fragment.goToActivity(noinline init: Intent.() -> Unit = {}) {
     val intent = Intent(requireContext(), T::class.java)

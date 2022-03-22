@@ -10,23 +10,15 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.boreal.commonutils.R
 import com.boreal.commonutils.databinding.CuLoadingViewBinding
 import com.kaopiz.kprogresshud.KProgressHUD
-import kotlin.reflect.KClass
 
-abstract class CUBaseActivity<B, V : ViewModel> (private val vkClass: KClass<V>): AppCompatActivity(),
-    CUBackHandler {
+abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
 
-    val mBinding: B by lazy {
+    val binding: B by lazy {
         DataBindingUtil.setContentView(this, getLayout()) as B
-    }
-
-    val viewModel by lazy {
-        ViewModelProvider(this).get(vkClass.javaObjectType)
     }
 
     private var hud: KProgressHUD? = null
@@ -35,8 +27,8 @@ abstract class CUBaseActivity<B, V : ViewModel> (private val vkClass: KClass<V>)
     var isEnableActionButtonBackPress = true
 
     abstract fun getLayout(): Int
-    abstract fun initDependency()
-    abstract fun initObservers()
+    open fun initDependency(){}
+    open fun initObservers(){}
     abstract fun initView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,19 +61,12 @@ abstract class CUBaseActivity<B, V : ViewModel> (private val vkClass: KClass<V>)
                 .setDimAmount(0.6f)
         }
         if (hud != null) {
-
-//            if(lottieView != null)
-//                lottieView?.playAnimation()
-
             hud?.setCancellable(isCancelable)
             if (isCancelable) {
                 hud?.setCancellable {
                     hideProgressBarCustom()
                 }
             }
-
-
-
             hud?.show()
         }
 
@@ -97,21 +82,9 @@ abstract class CUBaseActivity<B, V : ViewModel> (private val vkClass: KClass<V>)
 
 
     override fun hideProgressBarCustom() {
-//        if(lottieView != null)
-//            lottieView?.pauseAnimation()
-
         if (hud != null && hud!!.isShowing)
             hud?.dismiss()
     }
-
-
-//    override fun onBackPressed() {
-//        if (AKCUBaseFragment != null)
-//            AKCUBaseFragment?.onFragmentBackPressed()
-//
-//        if (isEnableActionButtonBackPress)
-//            super.onBackPressed()
-//    }
 
     override fun hideKeyBoard() {
         if (currentFocus != null) {
