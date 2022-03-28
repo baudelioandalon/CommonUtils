@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.boreal.commonutils.R
 import com.boreal.commonutils.databinding.CuLoadingViewBinding
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -27,8 +28,8 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
     var isEnableActionButtonBackPress = true
 
     abstract fun getLayout(): Int
-    open fun initDependency(){}
-    open fun initObservers(){}
+    open fun initDependency() {}
+    open fun initObservers() {}
     abstract fun initView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +54,10 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         }
 
         if (hud == null) {
+            mBindingMessage.lottieView.setAnimation(R.raw.a_loading_lottie)
+            mBindingMessage.lottieView.repeatCount = LottieDrawable.INFINITE
+            mBindingMessage.lottieView.playAnimation()
+
             hud = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setCustomView(view)

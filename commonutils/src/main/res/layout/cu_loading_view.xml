@@ -19,20 +19,17 @@
                 android:id="@+id/lottieView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/a_loading_lottie" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/txtLoading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="320dp"
-                android:visibility="gone"
                 android:gravity="center"
                 android:text="@string/cargando"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:visibility="gone" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
