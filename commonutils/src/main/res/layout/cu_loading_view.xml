@@ -22,7 +22,7 @@
                 android:gravity="center"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/ak_loading" />
+                app:lottie_rawRes="@raw/a_loading_lottie" />
 
             <TextView
                 android:id="@+id/txtLoading"

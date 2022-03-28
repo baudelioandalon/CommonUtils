@@ -8,7 +8,7 @@ import com.boreal.commonutils.extensions.showToast
 
 fun MainActivity.initElements(){
 
-    mBinding.apply {
+    binding.apply {
         btnOpen.setOnClickListener {
 //            txtElement.saveData("NUMBER")
 //            "CATORCE".saveData("NUMBER")
