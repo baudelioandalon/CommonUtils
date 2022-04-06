@@ -3,4 +3,5 @@
     <string name="abrir">Abrir</string>
     <string name="guardar">Guardar</string>
     <string name="obtener">Obtener</string>
+    <string name="abrir_dialogo">Abrir dialogo</string>
 </resources>

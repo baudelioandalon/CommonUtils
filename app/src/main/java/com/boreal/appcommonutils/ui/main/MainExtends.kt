@@ -6,7 +6,7 @@ import com.boreal.commonutils.extensions.saveData
 import com.boreal.commonutils.extensions.setOnSingleClickListener
 import com.boreal.commonutils.extensions.showToast
 
-fun MainActivity.initElements(){
+fun MainActivity.initElements() {
 
     binding.apply {
         btnOpen.setOnClickListener {
@@ -32,6 +32,10 @@ fun MainActivity.initElements(){
         }
         btnFloat.setOnSingleClickListener {
             showToast(txtInputElement.getAmount().toString())
+        }
+
+        btnDialog.setOnSingleClickListener {
+
         }
     }
 }
