@@ -33,7 +33,7 @@ fun MainActivity.initElements() {
             showToast(txtInputElement.getAmount().toString())
         }
         btnDialog.setOnSingleClickListener {
-            showProgress()
+            showProgress(isCancelable = true)
         }
     }
 }
