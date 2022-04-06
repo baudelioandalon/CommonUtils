@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import com.airbnb.lottie.LottieDrawable
 import com.boreal.commonutils.R
 import com.boreal.commonutils.databinding.CuLoadingViewBinding
+import com.boreal.commonutils.extensions.setOnSingleClickListener
 
 class DialogFragmentType(
     private val textLoading: String? = null,
@@ -20,7 +21,7 @@ class DialogFragmentType(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
+        setStyle(STYLE_NO_TITLE, R.style.FullScreenDialog)
         isCancelable = cancelableDialog
     }
 
@@ -31,8 +32,12 @@ class DialogFragmentType(
     ) = CuLoadingViewBinding.inflate(inflater, container, false).apply {
         bindingDialog = this
         txtLoading.text = textLoading ?: ""
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        dialog?.window?.setDimAmount(0f)
+        if (cancelableDialog) {
+            containerLoading.setOnSingleClickListener {
+                dialog?.dismiss()
+            }
+        }
+
         lottieResource?.let {
             lottieView.setAnimation(lottieResource)
             lottieView.repeatCount = LottieDrawable.INFINITE

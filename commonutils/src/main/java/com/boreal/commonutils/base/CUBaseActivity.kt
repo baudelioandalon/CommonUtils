@@ -59,31 +59,6 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         if (!dialog.isVisible) {
             dialog.show(supportFragmentManager, "dialog")
         }
-//        val view = layoutInflater.inflate(R.layout.cu_loading_view, null)
-//        val mBindingMessage = CuLoadingViewBinding.bind(view)
-//        mBindingMessage.txtLoading.text = message
-
-//        if (hud == null) {
-//            mBindingMessage.lottieView.setAnimation(R.raw.a_loading_lottie)
-//            mBindingMessage.lottieView.repeatCount = LottieDrawable.INFINITE
-//            mBindingMessage.lottieView.playAnimation()
-//
-//            hud = KProgressHUD.create(this)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setCustomView(view)
-//                .setAnimationSpeed(2)
-//                .setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
-//                .setDimAmount(0.6f)
-//        }
-//        if (hud != null) {
-//            hud?.setCancellable(isCancelable)
-//            if (isCancelable) {
-//                hud?.setCancellable {
-//                    hideProgressBarCustom()
-//                }
-//            }
-//            hud?.show()
-//        }
 
     }
 
@@ -97,8 +72,9 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
 
 
     override fun hideProgress() {
-//        if (hud != null && hud!!.isShowing)
-//            hud?.dismiss()
+        if (this::dialog.isInitialized && dialog.isVisible) {
+            dialog.dismiss()
+        }
     }
 
     override fun hideKeyBoard() {

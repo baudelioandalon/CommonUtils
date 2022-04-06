@@ -28,5 +28,5 @@
 
     <color name="redError">#AF272F</color>
 
-    <color name="bgLoader">#80E3F2ED</color>
+    <color name="bgLoader">#23F6F6F6</color>
 </resources>
