@@ -83,6 +83,14 @@
     </style>
 
 
+    <style name="FullScreenDialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
     <style name="AKCommonUtils.Toolbar.Title" parent="">
         <item name="android:textSize">20sp</item>
     </style>
