@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
+import com.boreal.commonutils.R
 import com.boreal.commonutils.extensions.disableBackButton
 
 abstract class CUBaseFragment<T : ViewDataBinding> :
@@ -50,8 +51,12 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
      * @param message: String?
      * @param isCancelable: Boolean
      */
-    fun showProgress(message: String? = null, isCancelable: Boolean = false) {
-        cuBackHandler.showProgress(message, isCancelable)
+    fun showProgress(
+        message: String? = null,
+        isCancelable: Boolean = false,
+        lottieResourceCustom: Int? = R.raw.a_loading_lottie
+    ) {
+        cuBackHandler.showProgress(message, isCancelable, lottieResourceCustom)
     }
 
     fun disableBackButton() {

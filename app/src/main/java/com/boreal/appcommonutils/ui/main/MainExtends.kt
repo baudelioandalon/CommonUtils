@@ -20,7 +20,6 @@ fun MainActivity.initElements() {
             Log.e("string", data.toString())
         }
 
-
         btnInts.setOnSingleClickListener {
             showToast(txtInputElement.getIntegers().toString())
         }
@@ -33,7 +32,6 @@ fun MainActivity.initElements() {
         btnFloat.setOnSingleClickListener {
             showToast(txtInputElement.getAmount().toString())
         }
-
         btnDialog.setOnSingleClickListener {
             showProgress()
         }

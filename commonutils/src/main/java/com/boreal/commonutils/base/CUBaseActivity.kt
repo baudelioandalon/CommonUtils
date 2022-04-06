@@ -43,9 +43,18 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         return true
     }
 
-    override fun showProgress(message: String?, isCancelable: Boolean) {
+    override fun showProgress(
+        message: String?,
+        isCancelable: Boolean,
+        lottieResource: Int?,
+    ) {
         if (!this::dialog.isInitialized) {
-            dialog = DialogFragmentType()
+            dialog =
+                DialogFragmentType(
+                    textLoading = message ?: "",
+                    cancelableDialog = isCancelable,
+                    lottieResource = lottieResource
+                )
         }
         if (!dialog.isVisible) {
             dialog.show(supportFragmentManager, "dialog")

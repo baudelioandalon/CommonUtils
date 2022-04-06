@@ -6,10 +6,7 @@
     <com.boreal.commonutils.component.roundablelayout.CURoundableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:cardBackgroundColor="@color/bgLoader"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
+        android:orientation="vertical">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieView"
@@ -28,9 +25,10 @@
             android:id="@+id/txtLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:text="@string/cargando"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/lottieView"
             app:layout_constraintStart_toStartOf="@+id/lottieView"
             app:layout_constraintTop_toBottomOf="@+id/lottieView"
