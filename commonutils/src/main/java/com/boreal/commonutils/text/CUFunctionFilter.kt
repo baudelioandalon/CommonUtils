@@ -4,13 +4,8 @@ import android.text.InputFilter
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
-import com.boreal.commonutils.component.cutextfield.CUTextField
-import java.util.Locale
-import kotlin.collections.ArrayList
+import java.util.*
 
-fun CUTextField.addFilterNotCharacterSpecial(exceptionType: Any? = null) {
-    editText.filters = editText.filters + filterNotCharacterSpecial(exceptionType)
-}
 
 fun filterNotCharacterSpecial(exceptionType: Any? = null): InputFilter {
     val filter = InputFilter { source, start, end, dest, dstart, dend ->

@@ -11,10 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.airbnb.lottie.LottieAnimationView
-import com.airbnb.lottie.LottieDrawable
 import com.boreal.commonutils.R
-import com.boreal.commonutils.databinding.CuLoadingViewBinding
-import com.kaopiz.kprogresshud.KProgressHUD
 
 abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
 
@@ -22,7 +19,7 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         DataBindingUtil.setContentView(this, getLayout()) as B
     }
 
-    private var hud: KProgressHUD? = null
+    private lateinit var dialog: DialogFragmentType
 
     //    private var AKCUBaseFragment: AKCUBaseFragment? = null
     var isEnableActionButtonBackPress = true
@@ -46,34 +43,38 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         return true
     }
 
-    override fun showProgressBarCustom(message: String?, isCancelable: Boolean) {
-        val view = layoutInflater.inflate(R.layout.cu_loading_view, null)
-        val mBindingMessage = CuLoadingViewBinding.bind(view)
-        message?.let {
-            mBindingMessage.txtLoading.text = message
+    override fun showProgress(message: String?, isCancelable: Boolean) {
+        if (!this::dialog.isInitialized) {
+            dialog = DialogFragmentType()
         }
+        if (!dialog.isVisible) {
+            dialog.show(supportFragmentManager, "dialog")
+        }
+//        val view = layoutInflater.inflate(R.layout.cu_loading_view, null)
+//        val mBindingMessage = CuLoadingViewBinding.bind(view)
+//        mBindingMessage.txtLoading.text = message
 
-        if (hud == null) {
-            mBindingMessage.lottieView.setAnimation(R.raw.a_loading_lottie)
-            mBindingMessage.lottieView.repeatCount = LottieDrawable.INFINITE
-            mBindingMessage.lottieView.playAnimation()
-
-            hud = KProgressHUD.create(this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCustomView(view)
-                .setAnimationSpeed(2)
-                .setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
-                .setDimAmount(0.6f)
-        }
-        if (hud != null) {
-            hud?.setCancellable(isCancelable)
-            if (isCancelable) {
-                hud?.setCancellable {
-                    hideProgressBarCustom()
-                }
-            }
-            hud?.show()
-        }
+//        if (hud == null) {
+//            mBindingMessage.lottieView.setAnimation(R.raw.a_loading_lottie)
+//            mBindingMessage.lottieView.repeatCount = LottieDrawable.INFINITE
+//            mBindingMessage.lottieView.playAnimation()
+//
+//            hud = KProgressHUD.create(this)
+//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setCustomView(view)
+//                .setAnimationSpeed(2)
+//                .setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
+//                .setDimAmount(0.6f)
+//        }
+//        if (hud != null) {
+//            hud?.setCancellable(isCancelable)
+//            if (isCancelable) {
+//                hud?.setCancellable {
+//                    hideProgressBarCustom()
+//                }
+//            }
+//            hud?.show()
+//        }
 
     }
 
@@ -86,9 +87,9 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
     }
 
 
-    override fun hideProgressBarCustom() {
-        if (hud != null && hud!!.isShowing)
-            hud?.dismiss()
+    override fun hideProgress() {
+//        if (hud != null && hud!!.isShowing)
+//            hud?.dismiss()
     }
 
     override fun hideKeyBoard() {

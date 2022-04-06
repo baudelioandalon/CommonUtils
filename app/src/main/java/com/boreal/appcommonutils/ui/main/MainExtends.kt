@@ -35,7 +35,7 @@ fun MainActivity.initElements() {
         }
 
         btnDialog.setOnSingleClickListener {
-
+            showProgress()
         }
     }
 }

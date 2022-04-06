@@ -3,33 +3,42 @@ package com.boreal.commonutils.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.WindowManager
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.boreal.commonutils.R
-import com.boreal.commonutils.extensions.showToast
+import com.boreal.commonutils.databinding.CuLoadingViewBinding
 
-class DialogFragmentType: DialogFragment() {
+class DialogFragmentType(
+    @LayoutRes val layoutRes: Int = R.layout.cu_loading_view,
+    private val cancelableDialog: Boolean = false
+) : DialogFragment(layoutRes) {
 
-    private lateinit var vBind: ZpErrorServerBinding
-
+    private lateinit var bindingDialog: CuLoadingViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.FullScreenDialog)
-       // setStyle(STYLE_NORMAL,android.R.style.Theme_DeviceDefault_Light_DialogWhenLarge_NoActionBar);
+        isCancelable = cancelableDialog
     }
 
-   override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = ZpErrorServerBinding.inflate(inflater, container, false).apply {
-        vBind = this
-
-        btnTryAgain.setOnClickListener {
-
-            showToast("Reintentandoo")
-
-        }
+    ) = CuLoadingViewBinding.inflate(inflater, container, false).apply {
+        bindingDialog = this
     }.root
+
+    override fun onStart() {
+        super.onStart()
+        if (dialog != null) {
+            isCancelable = cancelableDialog
+            dialog!!.window!!.setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+            )
+        }
+    }
 
 }

@@ -50,8 +50,8 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
      * @param message: String?
      * @param isCancelable: Boolean
      */
-    fun showProgressBarCustom(message: String? = null, isCancelable: Boolean = false) {
-        cuBackHandler.showProgressBarCustom(message, isCancelable)
+    fun showProgress(message: String? = null, isCancelable: Boolean = false) {
+        cuBackHandler.showProgress(message, isCancelable)
     }
 
     fun disableBackButton() {
@@ -63,7 +63,7 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
      * @see Oculta el progressbar
      */
     fun hideProgressBarCustom() {
-        cuBackHandler.hideProgressBarCustom()
+        cuBackHandler.hideProgress()
     }
 
     fun setBackFragment(listenerBackPress: CUBackFragment) {
