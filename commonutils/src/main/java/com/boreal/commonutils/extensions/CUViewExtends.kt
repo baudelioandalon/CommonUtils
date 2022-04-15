@@ -9,6 +9,10 @@ fun <T : View> T.hideView() {
     visibility = View.GONE
 }
 
+fun <T : View> T.invisibleView() {
+    visibility = View.INVISIBLE
+}
+
 fun <T : View> T.showView() {
     visibility = View.VISIBLE
 }
