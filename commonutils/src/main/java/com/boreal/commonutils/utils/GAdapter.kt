@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class GAdapter<T : ViewDataBinding, V>(
     @LayoutRes val layoutId: Int,
     diff: AsyncDifferConfig<V>,
-    val holderCallback: (T, V, List<V>, GAdapter<T, V>) -> Unit
+    val holderCallback: (T, V, List<V>, GAdapter<T, V>, position: Int) -> Unit
 ) : ListAdapter<V, GAdapter<T, V>.CardViewHolder<T>>(diff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CardViewHolder(
@@ -23,7 +23,12 @@ class GAdapter<T : ViewDataBinding, V>(
     )
 
     override fun onBindViewHolder(holder: CardViewHolder<T>, position: Int) {
-        holderCallback.invoke(holder.binding, currentList[position], currentList, this)
+        holderCallback.invoke(
+            holder.binding,
+            currentList[position],
+            currentList,
+            this, position
+        )
     }
 
     inner class CardViewHolder<T : ViewDataBinding>(val binding: T) :
