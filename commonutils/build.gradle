@@ -108,8 +108,9 @@ dependencies {
     implementation 'com.camerakit:jpegkit:0.1.0'
 
     //Room
-    implementation "androidx.room:room-runtime:2.3.0"
-    kapt "androidx.room:room-compiler:2.3.0"
+    implementation 'androidx.room:room-runtime:2.4.0-alpha03'
+    annotationProcessor 'androidx.room:room-compiler:2.4.0-alpha03'
+    kapt 'androidx.room:room-compiler:2.4.0-alpha03'
 
     //ImageViewer
     implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
