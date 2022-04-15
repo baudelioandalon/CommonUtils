@@ -2,11 +2,7 @@ package com.boreal.commonutils.component.roundablelayout
 
 import android.annotation.TargetApi
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Outline
-import android.graphics.Path
-import android.graphics.RectF
+import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
