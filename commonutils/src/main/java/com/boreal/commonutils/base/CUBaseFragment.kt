@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -17,6 +18,8 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 
     lateinit var cuBackHandler: CUBackHandler
     private var listenerBackPress: CUBackFragment? = null
+    private var dispatcherBackActivated = false
+    private var callbackDispatcher: OnBackPressedCallback? = null
 
     lateinit var binding: T
 
@@ -64,10 +67,17 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         requireActivity().disableBackButton()
     }
 
-    fun onBackPressedDispatcher(onBackPressed: () -> Unit) {
-        requireActivity().onBackPressedDispatcher.addCallback {
-
+    fun onBackPressedDispatcher(onBackPressed: (back: OnBackPressedCallback) -> Unit) {
+        dispatcherBackActivated = true
+        callbackDispatcher = requireActivity().onBackPressedDispatcher.addCallback {
+            onBackPressed.invoke(this)
         }
+
+    }
+
+    fun disableDispatcher() {
+        dispatcherBackActivated = false
+        callbackDispatcher = null
     }
 
     /**
@@ -110,8 +120,14 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 //        return false
 //    }
 
-    fun onFragmentBackPressed() {
-        requireActivity().onBackPressed()
+    fun onFragmentBackPressed(forceBackPressed: Boolean = false) {
+        if (!forceBackPressed) {
+            requireActivity().onBackPressed()
+        } else {
+            callbackDispatcher?.isEnabled = false
+            requireActivity().onBackPressed()
+            callbackDispatcher?.isEnabled = true
+        }
     }
 
     /**
