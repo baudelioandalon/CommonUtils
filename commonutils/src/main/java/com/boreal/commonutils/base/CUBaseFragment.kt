@@ -18,7 +18,6 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 
     lateinit var cuBackHandler: CUBackHandler
     private var listenerBackPress: CUBackFragment? = null
-    private var dispatcherBackActivated = false
     private var callbackDispatcher: OnBackPressedCallback? = null
 
     lateinit var binding: T
@@ -68,16 +67,31 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
     }
 
     fun onBackPressedDispatcher(onBackPressed: (back: OnBackPressedCallback) -> Unit) {
-        dispatcherBackActivated = true
         callbackDispatcher = requireActivity().onBackPressedDispatcher.addCallback {
             onBackPressed.invoke(this)
         }
-
     }
 
-    fun disableDispatcher() {
-        dispatcherBackActivated = false
+    fun onFragmentBackPressed(forceBackPressed: Boolean = false) {
+        if (!forceBackPressed) {
+            requireActivity().onBackPressed()
+        } else {
+            callbackDispatcher?.isEnabled = false
+            requireActivity().onBackPressed()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         callbackDispatcher = null
+    }
+
+    fun disableOnBackDispatcher() {
+        callbackDispatcher?.isEnabled = false
+    }
+
+    fun enableOnBackDispatcher() {
+        callbackDispatcher?.isEnabled = true
     }
 
     /**
@@ -120,15 +134,6 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 //        return false
 //    }
 
-    fun onFragmentBackPressed(forceBackPressed: Boolean = false) {
-        if (!forceBackPressed) {
-            requireActivity().onBackPressed()
-        } else {
-            callbackDispatcher?.isEnabled = false
-            requireActivity().onBackPressed()
-            callbackDispatcher?.isEnabled = true
-        }
-    }
 
     /**
      * Interface que se implementa en cada fragmento que requiera aplicar una
