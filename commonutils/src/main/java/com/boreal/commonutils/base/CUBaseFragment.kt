@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -61,6 +62,12 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 
     fun disableBackButton() {
         requireActivity().disableBackButton()
+    }
+
+    fun onBackPressedDispatcher(onBackPressed: () -> Unit) {
+        requireActivity().onBackPressedDispatcher.addCallback {
+
+        }
     }
 
     /**
