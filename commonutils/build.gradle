@@ -99,6 +99,7 @@ dependencies {
     //Code Scaner
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.github.bumptech.glide:glide:4.13.0")
 
     //Justified textview
     implementation 'com.uncopt:android.justified:1.0'
