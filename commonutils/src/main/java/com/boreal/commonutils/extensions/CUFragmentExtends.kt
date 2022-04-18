@@ -13,7 +13,7 @@ fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message, duration).show()
 }
 
-fun Fragment.showImageViewer(listImages: ArrayList<String>) {
+fun Fragment.showImageViewer(listImages: List<String>) {
     listImages.filter { it != "NONE" && it != "" }.apply {
         if (isEmpty()) return@apply showToast("No hay imagen para mostrar")
         StfalconImageViewer.Builder(

@@ -14,7 +14,7 @@ import java.util.ArrayList
 fun Activity.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
-fun Activity.showImageViewer(listImages: ArrayList<String>) {
+fun Activity.showImageViewer(listImages: List<String>) {
     listImages.filter { it != "NONE" && it != "" }.apply {
         if (isEmpty()) return@apply showToast("No hay imagen para mostrar")
         StfalconImageViewer.Builder(
