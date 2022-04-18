@@ -46,3 +46,23 @@ fun Fragment.openFacebookActivity(pageId: String) {
     }
     startActivity(Intent(Intent.ACTION_VIEW, uri))
 }
+
+fun Fragment.openMapsActivity(byLocation: String = "", byAddress: String = "") {
+
+    lateinit var uri: Uri
+    try {
+        val applicationInfo =
+            requireActivity().packageManager.getApplicationInfo("com.google.android.apps.maps", 0)
+        if (applicationInfo.enabled) {
+            uri = if (byAddress.isNotEmpty()) {
+                Uri.parse("geo:0,0?q=$byAddress")
+            } else {
+                Uri.parse("geo:$byLocation")
+//                Uri.parse("geo:37.7749,-122.4194")
+            }
+        }
+    } catch (ignored: PackageManager.NameNotFoundException) {
+        uri = Uri.parse("geo:0,0?q=$byAddress")
+    }
+    startActivity(Intent(Intent.ACTION_VIEW, uri))
+}
