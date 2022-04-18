@@ -2,6 +2,8 @@ package com.boreal.commonutils.extensions
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
@@ -29,4 +31,18 @@ inline fun <reified T : Activity> Fragment.goToActivity(noinline init: Intent.()
     val intent = Intent(requireContext(), T::class.java)
     intent.init() //pasar parámetros
     startActivity(intent)
+}
+
+fun Fragment.openFacebookActivity(pageId: String) {
+    lateinit var uri: Uri
+    try {
+        val applicationInfo =
+            requireActivity().packageManager.getApplicationInfo("com.facebook.katana", 0)
+        if (applicationInfo.enabled) {
+            uri = Uri.parse("fb://page/$pageId")
+        }
+    } catch (ignored: PackageManager.NameNotFoundException) {
+        uri = Uri.parse(pageId)
+    }
+    startActivity(Intent(Intent.ACTION_VIEW, uri))
 }
