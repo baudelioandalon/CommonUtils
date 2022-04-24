@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 class GAdapter<T : ViewDataBinding, V>(
     @LayoutRes val layoutId: Int,
     diff: AsyncDifferConfig<V>,
-    val holderCallback: (T, V, List<V>, GAdapter<T, V>, position: Int) -> Unit
+    val holderCallback: (T, V, List<V>, GAdapter<T, V>, position: Int) -> Unit,
+    val onListChanged: ((previousList: MutableList<V>, currentList: MutableList<V>) -> Unit)? = null,
 ) : ListAdapter<V, GAdapter<T, V>.CardViewHolder<T>>(diff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CardViewHolder(
@@ -29,6 +30,22 @@ class GAdapter<T : ViewDataBinding, V>(
             currentList,
             this, position
         )
+    }
+
+    override fun onCurrentListChanged(previousList: MutableList<V>, currentList: MutableList<V>) {
+        onListChanged?.invoke(previousList, currentList)
+    }
+
+    fun removeAt(position: Int) {
+        val list = currentList.toMutableList()
+        list.removeAt(position)
+        submitList(list)
+    }
+
+    fun remove(element: V) {
+        val list = currentList.toMutableList()
+        list.remove(element)
+        submitList(list)
     }
 
     inner class CardViewHolder<T : ViewDataBinding>(val binding: T) :
