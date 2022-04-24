@@ -25,6 +25,19 @@ fun Fragment.showImageViewer(listImages: List<String>) {
     }
 }
 
+@JvmName("showImageViewerUri")
+fun Fragment.showImageViewer(listImages: List<Uri>) {
+    listImages.filter { it != Uri.EMPTY }.apply {
+        if (isEmpty()) return@apply showToast("No hay imagen para mostrar")
+        StfalconImageViewer.Builder(
+            context,
+            this
+        ) { view, image ->
+            view.setImageURI(image)
+        }.show()
+    }
+}
+
 fun Fragment.getSupportFragmentManager() = requireActivity().supportFragmentManager
 
 inline fun <reified T : Activity> Fragment.goToActivity(noinline init: Intent.() -> Unit = {}) {
