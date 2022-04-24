@@ -85,10 +85,14 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
         }
     }
 
-    override fun showKeyBoard(viewEditable: View) {
-        if (currentFocus != null) {
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(viewEditable, InputMethodManager.SHOW_IMPLICIT)
+    override fun showKeyBoard(viewEditable: View, requestFocused: Boolean) {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInputFromWindow(
+            viewEditable.applicationWindowToken,
+            InputMethodManager.SHOW_FORCED, 0
+        )
+        if (requestFocused) {
+            viewEditable.requestFocus()
         }
     }
 

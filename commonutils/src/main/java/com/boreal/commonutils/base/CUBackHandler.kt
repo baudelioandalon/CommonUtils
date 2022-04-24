@@ -14,7 +14,7 @@ interface CUBackHandler {
 
     fun hideProgress()
     fun hideKeyBoard()
-    fun showKeyBoard(viewEditable: View)
+    fun showKeyBoard(viewEditable: View, requestFocused: Boolean = true)
     fun showLottie(
         lottie: LottieAnimationView,
         containerPersonality: View,

@@ -113,6 +113,10 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         cuBackHandler.hideKeyBoard()
     }
 
+    fun showKeyboard(view: View) {
+        cuBackHandler.showKeyBoard(view)
+    }
+
     fun showLottie(
         lottie: LottieAnimationView,
         containerPersonality: View,
