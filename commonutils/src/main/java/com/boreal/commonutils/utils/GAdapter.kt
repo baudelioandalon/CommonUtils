@@ -42,6 +42,25 @@ class GAdapter<T : ViewDataBinding, V>(
         submitList(list)
     }
 
+    fun addAt(item: V, position: Int) {
+        val list = currentList.toMutableList()
+        list.add(position, item)
+        submitList(list)
+    }
+
+    fun add(item: V) {
+        val list = currentList.toMutableList()
+        list.add(item)
+        submitList(list)
+    }
+
+    fun replaceAt(item: V, position: Int) {
+        val list = currentList.toMutableList()
+        list.removeAt(position)
+        list.add(position, item)
+        submitList(list)
+    }
+
     fun remove(element: V) {
         val list = currentList.toMutableList()
         list.remove(element)
