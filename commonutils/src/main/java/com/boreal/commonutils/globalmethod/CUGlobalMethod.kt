@@ -15,3 +15,7 @@ fun randomNumberId() = (10000..99999).random()
 fun randomANID(sizeId: Int = 20) = List(sizeId) {
     (('a'..'z') + ('A'..'Z') + ('0'..'9')).random()
 }.joinToString("")
+
+fun firestoreId(sizeId: Int = 10) = List(sizeId) {
+    (('a'..'Z') + ('0'..'9')).random()
+}.joinToString("")

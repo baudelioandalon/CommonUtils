@@ -22,6 +22,11 @@ fun <T : View> T.showIf(sentence: Boolean, result: (Boolean) -> Unit = {}) {
     visibility = if (sentence) View.VISIBLE else View.GONE
 }
 
+fun <T : View> T.notInvisibleIf(sentence: Boolean, result: (Boolean) -> Unit = {}) {
+    result(sentence)
+    visibility = if (sentence) View.VISIBLE else View.INVISIBLE
+}
+
 fun <T : View> T.hideIf(sentence: Boolean, result: (Boolean) -> Unit = {}) {
     result(sentence)
     visibility = if (sentence) View.GONE else View.VISIBLE
@@ -43,3 +48,5 @@ fun View.animateFadeIn(duration: Long = 350) {
 fun View.setOnSingleClickListener(doOnClick: ((View) -> Unit)) =
     setOnClickListener(OnSingleClickListener(doOnClick))
 
+fun View.onClick(doOnClick: ((View) -> Unit)) =
+    setOnClickListener(OnSingleClickListener(doOnClick))
