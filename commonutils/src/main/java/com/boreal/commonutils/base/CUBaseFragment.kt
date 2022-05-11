@@ -40,10 +40,10 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
 
         initDependency(savedInstanceState)
-        initObservers()
         if (activity is CUBackHandler) {
             cuBackHandler = activity as CUBackHandler
         }
+        initObservers()
         initView()
         return binding.root
     }
