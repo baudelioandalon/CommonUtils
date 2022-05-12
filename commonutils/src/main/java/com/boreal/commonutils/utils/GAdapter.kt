@@ -32,6 +32,10 @@ class GAdapter<T : ViewDataBinding, V>(
         )
     }
 
+    fun notifyListContentChanged(){
+        onListChanged?.invoke(currentList, currentList)
+    }
+
     override fun onCurrentListChanged(previousList: MutableList<V>, currentList: MutableList<V>) {
         onListChanged?.invoke(previousList, currentList)
     }
