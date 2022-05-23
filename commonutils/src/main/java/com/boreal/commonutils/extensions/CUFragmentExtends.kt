@@ -3,6 +3,7 @@ package com.boreal.commonutils.extensions
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -36,6 +37,17 @@ fun Fragment.showImageViewer(listImages: List<Uri>) {
             view.setImageURI(image)
         }.show()
     }
+}
+
+@JvmName("showImageViewerBitmap")
+fun Fragment.showImageViewer(listImages: List<Bitmap?>) {
+    if (listImages.isNullOrEmpty() || listImages.contains(null)) return showToast("Ningun elemento puede estár vacio")
+    StfalconImageViewer.Builder(
+        context,
+        listImages
+    ) { view, image ->
+        view.setImageBitmap(image)
+    }.show()
 }
 
 fun Fragment.getSupportFragmentManager() = requireActivity().supportFragmentManager

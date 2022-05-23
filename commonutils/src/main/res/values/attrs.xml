@@ -2,27 +2,6 @@
 <resources>
     <attr name="label" format="string" />
 
-    <declare-styleable name="AKTextField">
-        <attr name="label" />
-        <attr name="android:inputType" />
-        <attr name="android:textColor" />
-        <attr name="endIconDrawable" />
-        <attr name="endIconMode" />
-        <attr name="android:maxLength" />
-    </declare-styleable>
-
-    <declare-styleable name="AKAutocomplete">
-        <attr name="label" />
-        <attr name="android:inputType" />
-        <attr name="android:textColor" />
-        <attr name="endIconDrawable" />
-        <attr name="endIconMode" />
-    </declare-styleable>
-
-    <declare-styleable name="AKToolbar">
-        <attr name="android:title" />
-    </declare-styleable>
-
     <declare-styleable name="flowBottomNavigation">
         <attr name="cu_defaultIconColor" format="color" />
         <attr name="cu_selectedIconColor" format="color" />
