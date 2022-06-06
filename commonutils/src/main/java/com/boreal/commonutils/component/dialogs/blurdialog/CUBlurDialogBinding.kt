@@ -1,4 +1,4 @@
-package com.boreal.commonutils.dialogs.blurdialog
+package com.boreal.commonutils.component.dialogs.blurdialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.boreal.commonutils.component.dialogs.blurdialog.CUSupportBlurDialogFragmentKotlin
 
 class CUBlurDialogBinding<B : ViewDataBinding> constructor(
     @LayoutRes private val layout: Int,

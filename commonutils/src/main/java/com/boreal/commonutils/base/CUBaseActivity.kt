@@ -56,7 +56,7 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
                     lottieResource = lottieResource
                 )
         }
-        if (!dialog.isVisible) {
+        if (!dialog.isVisible && !dialog.isAdded) {
             dialog.show(supportFragmentManager, "dialog")
         }
 
