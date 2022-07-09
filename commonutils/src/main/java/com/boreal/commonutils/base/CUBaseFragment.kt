@@ -1,17 +1,22 @@
 package com.boreal.commonutils.base
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
 import com.boreal.commonutils.R
 import com.boreal.commonutils.extensions.disableBackButton
+import com.boreal.commonutils.utils.*
 
 abstract class CUBaseFragment<T : ViewDataBinding> :
     Fragment() {
@@ -78,6 +83,103 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         } else {
             callbackDispatcher?.isEnabled = false
             requireActivity().onBackPressed()
+        }
+    }
+
+    private var onRequestFailure: () -> Unit = {}
+    private var onRequestSuccess: () -> Unit = {}
+
+    fun getPermissionsStorage(onFailure: () -> Unit = {}, onSuccess: () -> Unit) {
+        ActivityCompat.shouldShowRequestPermissionRationale(
+            requireActivity(),
+            permissionStorage
+        )
+        onRequestFailure = onFailure
+        onRequestSuccess = onSuccess
+        requestAllPermissions(REQUEST_STORAGE)
+    }
+
+    fun getPermissionsCamera(onFailure: () -> Unit = {}, onSuccess: () -> Unit) {
+        ActivityCompat.shouldShowRequestPermissionRationale(
+            requireActivity(),
+            permissionCamera
+        )
+        onRequestFailure = onFailure
+        onRequestSuccess = onSuccess
+        requestAllPermissions(REQUEST_IMAGE_CAPTURE)
+    }
+
+    fun getPermissionsReadStorage(onFailure: () -> Unit = {}, onSuccess: () -> Unit) {
+        ActivityCompat.shouldShowRequestPermissionRationale(
+            requireActivity(),
+            permissionReadStorage
+        )
+        onRequestFailure = onFailure
+        onRequestSuccess = onSuccess
+        requestAllPermissions(REQUEST_GALLERY_CAPTURE)
+    }
+
+    //TODO Buscar el metodo no deprecado
+    private fun requestAllPermissions(requestCode: Int) {
+        requestPermissions(
+            arrayOf(permissionCamera, permissionReadStorage, permissionStorage),
+            requestCode
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            REQUEST_STORAGE -> {
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    onRequestSuccess()
+                } else {
+                    onRequestFailure()
+                    Toast.makeText(
+                        requireContext(),
+                        "No cuenta con permisos de almacenamiento",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            REQUEST_IMAGE_CAPTURE -> {
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    onRequestSuccess()
+                } else {
+                    onRequestFailure()
+                    Toast.makeText(
+                        requireContext(),
+                        "No cuenta con permisos de cámara",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            REQUEST_GALLERY_CAPTURE -> {
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                ) {
+                    onRequestSuccess()
+                } else {
+                    onRequestFailure()
+                    Toast.makeText(
+                        requireContext(),
+                        "No cuenta con permisos de lectura",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
