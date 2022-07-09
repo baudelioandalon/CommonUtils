@@ -1,13 +1,17 @@
 package com.boreal.commonutils.component.cunumberamount
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.res.TypedArray
 import android.text.InputFilter
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -19,7 +23,7 @@ import com.boreal.commonutils.extensions.changeTextSize
 import com.boreal.commonutils.extensions.maxLength
 import com.google.android.material.textview.MaterialTextView
 import java.text.NumberFormat
-import java.util.Locale
+import java.util.*
 
 
 /**
@@ -532,6 +536,16 @@ class CUNumberAmount(context: Context, val attrs: AttributeSet?) :
 
         } else {
             edtIntegers.hint = "0"
+        }
+
+        edtIntegers.setOnEditorActionListener { v, actionId, event ->
+            Log.e("IME_ACTION", actionId.toString())
+            if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                val inputMethodManager =
+                    context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)
+            }
+            false
         }
     }
 
