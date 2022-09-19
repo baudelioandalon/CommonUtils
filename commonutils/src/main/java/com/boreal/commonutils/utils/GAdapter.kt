@@ -24,7 +24,7 @@ class GAdapter<T : ViewDataBinding, V>(
     )
 
     override fun onBindViewHolder(holder: CardViewHolder<T>, position: Int) {
-        holderCallback.invoke(
+        holderCallback(
             holder.binding,
             currentList[position],
             currentList,
