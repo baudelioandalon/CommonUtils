@@ -219,9 +219,9 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
         cuBackHandler.showKeyBoard(view)
     }
 
-    fun configToolbarDefault() {
+    fun configToolbarDefault(color: Int = Color.WHITE) {
         if (activity != null) {
-            requireActivity().window.statusBarColor = Color.WHITE
+            requireActivity().window.statusBarColor = color
             requireActivity().window.decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
