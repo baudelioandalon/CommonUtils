@@ -1,7 +1,7 @@
 package com.boreal.commonutils.base
 
-import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -217,6 +217,14 @@ abstract class CUBaseFragment<T : ViewDataBinding> :
 
     fun showKeyboard(view: View) {
         cuBackHandler.showKeyBoard(view)
+    }
+
+    fun configToolbarDefault() {
+        if (activity != null) {
+            requireActivity().window.statusBarColor = Color.WHITE
+            requireActivity().window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     fun showLottie(

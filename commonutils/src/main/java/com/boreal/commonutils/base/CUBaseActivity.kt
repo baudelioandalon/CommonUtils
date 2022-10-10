@@ -62,12 +62,9 @@ abstract class CUBaseActivity<B> : AppCompatActivity(), CUBackHandler {
 
     }
 
-
-    private fun configToolbarDefault() {
-        this.apply {
-            window.statusBarColor = Color.WHITE
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }
+    fun configToolbarDefault() {
+        window.statusBarColor = Color.WHITE
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
 
